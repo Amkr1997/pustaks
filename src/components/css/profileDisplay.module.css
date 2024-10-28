@@ -1,0 +1,16 @@
+.profileContain {
+  max-width: 30rem;
+  height: fit-content;
+}
+
+.emailLabel {
+  color: #212529;
+}
+
+.emailVal {
+  color: #212529;
+}
+
+.profilePic {
+  height: 10rem;
+}

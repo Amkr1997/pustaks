@@ -1,0 +1,38 @@
+.logo {
+  background-color: #e7f5ff;
+  width: fit-content;
+}
+
+.logoHalf {
+  color: #1864ab;
+}
+
+.bookBtn {
+  background-color: #1864ab;
+  color: #fff;
+  text-decoration: none;
+  border: 0.0625rem solid #1864ab;
+  border-radius: 1.75rem;
+}
+
+.bookBtn:hover {
+  background-color: #e7f5ff;
+  color: #212529;
+  transition: all 0.3s;
+  border: 0.0625rem solid #1864ab;
+}
+
+.cartIcon {
+  color: #1864ab;
+  font-size: 1.5rem;
+}
+
+.wishlist {
+  color: #1864ab;
+  font-size: 1.25rem;
+}
+
+.profile {
+  color: #1864ab;
+  font-size: 1.5rem;
+}

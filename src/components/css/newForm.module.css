@@ -1,0 +1,30 @@
+.submitBtn {
+  background-color: #ff6b6b;
+  border: none;
+  color: #fff;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  margin-left: auto;
+}
+
+.submitBtn:hover {
+  background-color: #f03e3e;
+  transition: all 0.2s;
+}
+
+/*.cancelBtn {
+  background-color: #e7f5ff;
+  border: none;
+  color: #212529;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  border: 0.0625rem solid #e7f5ff;
+}
+
+.cancelBtn:hover {
+  background-color: #228be6;
+  color: #fff;
+  transition: all 0.2s;
+  border: 0.0625rem solid #228be6;
+}*/

@@ -1,0 +1,37 @@
+.footerContainer {
+  background-color: #74c0fc;
+  padding: 4rem 0;
+}
+
+.logo {
+  background-color: #e7f5ff;
+  width: fit-content;
+  color: #212529;
+}
+
+.bhandar {
+  color: #1864ab;
+}
+
+.footerNav {
+  list-style: none;
+  padding-left: 0.25rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #1864ab;
+}
+
+.navLink:hover {
+  color: #212529;
+  transition: all 0.5s;
+}
+
+.footerLogo {
+  text-decoration: none;
+}

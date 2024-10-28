@@ -1,0 +1,19 @@
+.newArivalImg {
+  max-height: 15rem;
+  object-fit: contain;
+}
+
+.newArivalLink {
+  background-color: #228be6;
+  text-decoration: none;
+  color: #fff;
+  padding: 0.25rem 0;
+  border: 0.00125rem solid #228be6;
+}
+
+.newArivalLink:hover {
+  background-color: #fff;
+  color: #228be6;
+  border: 0.00125rem solid #228be6;
+  transition: all 0.1s;
+}

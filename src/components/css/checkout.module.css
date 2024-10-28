@@ -1,0 +1,67 @@
+/*
+colors used blue/black => #1864ab, #228be6, #212529, #74c0fc.
+*/
+
+.checkoutContainer {
+  background-color: #f1f3f5;
+  border-radius: 0.5rem;
+}
+
+.bookImg {
+  height: 90%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.quantity {
+  width: fit-content;
+}
+
+.quantityInp {
+  width: 10%;
+  outline: none;
+  border: 0.00125rem solid black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeBtn,
+.moveToWishlist,
+.placeOrder {
+  background-color: #228be6;
+  border: none;
+  border-radius: 0.75rem;
+  color: #fff;
+  padding: 0.25rem 0;
+  border: 0.00125rem solid #228be6;
+}
+
+.removeBtn:hover,
+.moveToWishlist:hover,
+.placeOrder:hover {
+  background-color: #fff;
+  color: #228be6;
+  border: 0.00125rem solid #228be6;
+  transition: all 0.1s;
+}
+
+.bookBtn {
+  background-color: #1864ab;
+  color: #fff;
+  text-decoration: none;
+  border: 0.00125rem solid #1864ab;
+  border-radius: 1rem;
+  padding: 0.25rem 0;
+  margin: 0 auto;
+  width: 15rem;
+  font-size: 1.125rem;
+}
+
+.bookBtn:hover {
+  background-color: #e7f5ff;
+  color: #212529;
+  border: 0.00125rem solid #1864ab;
+  transition: all 0.1s;
+}

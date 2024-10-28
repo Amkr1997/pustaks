@@ -1,0 +1,47 @@
+/*
+colors used blue/black => #1864ab, #228be6, #212529, #74c0fc.
+*/
+
+.bookImage {
+  height: 15rem;
+  width: 100%;
+  object-fit: contain;
+}
+
+.bookItem {
+  text-decoration: none;
+}
+
+.cartBtns {
+  display: flex;
+}
+
+.cartBtn {
+  height: 2rem;
+  padding: 0 1.25rem;
+  border-radius: 0.75rem;
+  background-color: #228be6;
+  border: 0;
+  color: #fff;
+}
+
+.cartBtn:hover {
+  background-color: #74c0fc;
+  color: #212529;
+  transition: all 0.3s;
+}
+
+.wishlistBtn {
+  height: 2rem;
+  padding: 0 0.5rem;
+  border: 0.125rem solid #228be6;
+  border-radius: 0.75rem;
+  color: #212529;
+}
+
+.wishlistBtn:hover {
+  border: none;
+  background-color: #228be6;
+  color: #fff;
+  transition: all 0.3s;
+}

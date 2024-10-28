@@ -1,0 +1,66 @@
+/*
+colors used blue/black => #1864ab, #228be6, #212529, #74c0fc.
+*/
+
+.wishlistContainer {
+  background-color: #f1f3f5;
+  border-radius: 0.5rem;
+}
+
+.bookImg {
+  height: 90%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.bookItem {
+  text-decoration: none;
+}
+
+.bookImage {
+  height: 15rem;
+  width: 100%;
+  object-fit: fill;
+}
+
+.wishlistCard {
+  width: 100%;
+}
+
+.cartBtn,
+.removeBtn {
+  height: 2rem;
+  width: 80%;
+  padding: 0 1.25rem;
+  border-radius: 0.75rem;
+  background-color: #228be6;
+  border: 0;
+  color: #fff;
+}
+
+.removeBtn {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.cartBtn:hover {
+  background-color: #74c0fc;
+  color: #212529;
+  transition: all 0.3s;
+}
+
+.removeBtn {
+  background-color: #228be6;
+  border: none;
+  border-radius: 0.75rem;
+  color: #fff;
+  padding: 0.25rem 0;
+  border: 0.00125rem solid #228be6;
+}
+
+.removeBtn:hover {
+  background-color: #fff;
+  color: #228be6;
+  border: 0.00125rem solid #228be6;
+  transition: all 0.1s;
+}

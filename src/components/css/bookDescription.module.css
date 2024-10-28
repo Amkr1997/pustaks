@@ -1,0 +1,107 @@
+/*
+colors used blue/black => #1864ab, #228be6, #212529, #74c0fc.
+*/
+
+.category {
+  color: #1864ab;
+}
+
+.rating {
+  color: #1864ab;
+}
+
+.starIcon {
+  color: #fcc419;
+}
+
+.detailsIcon {
+  font-size: 2.25rem;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cartBtn {
+  border-radius: 1.25rem;
+  background-color: #228be6;
+  border: none;
+  color: #fff;
+  padding: 0.25rem 0;
+}
+
+.cartBtn:hover {
+  background-color: #74c0fc;
+  color: #212529;
+  transition: all 0.03s;
+}
+
+.wishlistBtn {
+  border-radius: 1.25rem;
+  background-color: #fff;
+  color: #212529;
+  border: 0.125rem solid #212529;
+  padding: 0.25rem 0;
+}
+
+.wishlistBtn:hover {
+  background-color: #212529;
+  color: #74c0fc;
+  transition: all 0.03s;
+}
+
+@media (min-width: 576px) {
+  .category {
+    color: #1864ab;
+  }
+
+  .rating {
+    color: #1864ab;
+  }
+
+  .starIcon {
+    color: #fcc419;
+  }
+
+  .detailsIcon {
+    font-size: 2.25rem;
+  }
+
+  .btnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.25rem 0;
+  }
+
+  .cartBtn {
+    border-radius: 1.25rem;
+    background-color: #228be6;
+    border: none;
+    color: #fff;
+    padding: 0.25rem 0;
+  }
+
+  .cartBtn:hover {
+    background-color: #74c0fc;
+    color: #212529;
+    transition: all 0.03s;
+  }
+
+  .wishlistBtn {
+    border-radius: 1.25rem;
+    background-color: #fff;
+    color: #212529;
+    border: 0.125rem solid #212529;
+    padding: 0.25rem 0;
+  }
+
+  .wishlistBtn:hover {
+    background-color: #212529;
+    color: #74c0fc;
+    transition: all 0.03s;
+  }
+}

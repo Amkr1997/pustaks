@@ -1,0 +1,42 @@
+.profileNav {
+  list-style: none;
+}
+
+.listItem {
+  margin-bottom: 0;
+  text-decoration: none;
+  color: #fff;
+  border: 0.0625rem solid #1864ab;
+  background-color: #228be6;
+  font-size: 1.25rem;
+  letter-spacing: 0.125rem;
+  padding: 0.0625rem 0;
+}
+
+.leftBtn {
+  border-top-left-radius: 1.25rem;
+  border-bottom-left-radius: 1.25rem;
+}
+
+.leftBtn:hover {
+  background-color: #fff;
+  color: #212529;
+  transition: all 0.2s;
+}
+
+.middleBtn:hover {
+  background-color: #fff;
+  color: #212529;
+  transition: all 0.2s;
+}
+
+.rightBtn {
+  border-top-right-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+}
+
+.rightBtn:hover {
+  background-color: #fff;
+  color: #212529;
+  transition: all 0.2s;
+}

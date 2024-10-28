@@ -1,0 +1,67 @@
+/*This page is not aligned with all other scss modules, This is sepcifically for the carousel component made with react-slick library rendered dynamically during runtime*/
+
+.slick-arrow.slick-prev,
+.slick-arrow.slick-next {
+  width: 1.5rem;
+  height: 7rem;
+  background-color: #5c7cfa;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slick-arrow.slick-prev::before,
+.slick-arrow.slick-next::before {
+  display: none;
+}
+
+.slick-arrow.slick-prev {
+  left: 0%;
+  top: 45%;
+  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.slick-arrow.slick-next {
+  right: 0%;
+  top: 45%;
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+.leftBtnCat.slick-arrow.slick-prev {
+  left: 0%;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+}
+
+.rightBtnCat.slick-arrow.slick-next {
+  right: 0%;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+}
+
+.leftDetailsBtn.slick-arrow.slick-prev {
+  left: 2.5%;
+  height: 9rem;
+  width: 1.25rem;
+  border-radius: 0.5rem;
+}
+
+.rightDetailsBtn.slick-arrow.slick-next {
+  right: 2.5%;
+  height: 9rem;
+  width: 1.25rem;
+  border-radius: 0.5rem;
+}
+
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  height: inherit !important;
+}

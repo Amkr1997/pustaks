@@ -1,0 +1,95 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: inline-block;
+  background-color: #e7f5ff;
+  width: fit-content;
+  padding: 0 0.25rem;
+  color: #1864ab;
+}
+
+.logo:hover {
+  color: #1864ab;
+}
+
+.logoHalf {
+  color: black;
+}
+
+.listContainer {
+  list-style: none;
+}
+
+.bookBtn {
+  background-color: #1864ab;
+  padding: 0 0.5rem;
+  color: #fff;
+  text-decoration: none;
+  border: 0.0625rem solid #1864ab;
+  border-radius: 1.75rem;
+}
+
+.bookBtn:hover {
+  background-color: #e7f5ff;
+  color: #212529;
+  transition: all 0.3s;
+  border: 0.0625rem solid #1864ab;
+}
+
+.inpContain {
+  max-width: 100%;
+  order: 3;
+  margin-top: 1.25rem;
+}
+
+.searchInp {
+  outline: none;
+  border-radius: 1rem;
+}
+
+.searchBtn {
+  background-color: #1864ab;
+  border: 0.0625rem solid #1864ab;
+  color: #fff;
+  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.cartIcon {
+  color: #1864ab;
+  font-size: 1.5rem;
+}
+
+.wishlist {
+  color: #1864ab;
+  font-size: 1.25rem;
+}
+
+.profile {
+  color: #1864ab;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .navbarTwoContainer {
+    max-width: 100%;
+  }
+
+  .nav {
+    flex-wrap: nowrap;
+  }
+
+  .listContainer {
+    order: 3;
+  }
+
+  .inpContain {
+    max-width: 40%;
+    margin-top: 0;
+  }
+}

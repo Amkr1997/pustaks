@@ -1,0 +1,42 @@
+.addAddress {
+  background-color: #e7f5ff;
+  border: none;
+  padding: 0.25rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.addressCard {
+  background-color: #f8f9fa;
+}
+
+.deleteBtn {
+  background-color: #ff6b6b;
+  border: none;
+  color: #fff;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+}
+
+.deleteBtn:hover {
+  background-color: #f03e3e;
+  transition: all 0.2s;
+}
+
+.editBtn {
+  background-color: #e7f5ff;
+  border: none;
+  color: #212529;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  border: 0.0625rem solid #e7f5ff;
+}
+
+.editBtn:hover {
+  background-color: #228be6;
+  color: #fff;
+  transition: all 0.2s;
+  border: 0.0625rem solid #228be6;
+}
