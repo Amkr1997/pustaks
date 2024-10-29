@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../components/css/booklist.module.css";
+import styles from "../components/css/bookList.module.css";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import { BsCartCheck } from "react-icons/bs";
