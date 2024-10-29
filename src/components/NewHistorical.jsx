@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "./css/newArivals.module.css";
+import styles from "../components/css/newArivals.module.css";
 import { useDispatch } from "react-redux";
 import { setbookToCart } from "../features/cartSlice";
 import { toast } from "react-toastify";

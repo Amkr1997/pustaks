@@ -1,5 +1,4 @@
 import { Outlet, NavLink } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import styles from "../components/css/profile.module.css";
 import NavbarTwo from "../components/NavbarTwo";
 import Footer from "../components/Footer";

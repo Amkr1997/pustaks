@@ -1,7 +1,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import "./css/carousel.css";
+import "../components/css/carousel.css";
 
 const images = [
   "https://images.pexels.com/photos/3861778/pexels-photo-3861778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",

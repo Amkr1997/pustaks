@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import styles from "./css/clearFilters.module.css";
+import styles from "../components/css/clearFilters.module.css";
 import {
   setFilterByCategory,
   setFilterByPrice,

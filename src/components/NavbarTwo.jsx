@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { BsBookmarksFill } from "react-icons/bs";
 import { BsPersonCircle } from "react-icons/bs";
-import styles from "./css/navbarTwo.module.css";
+import styles from "../components/navbarTwo.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilterSearch, setSearchInp } from "../features/bookSlice";
 

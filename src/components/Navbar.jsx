@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { BsBookmarksFill } from "react-icons/bs";
 import { BsPersonCircle } from "react-icons/bs";
-import styles from "./css/navbar.module.css";
+import styles from "../components/css/navbar.module.css";
 
 const Navbar = () => {
   return (

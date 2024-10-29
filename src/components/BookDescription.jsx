@@ -1,4 +1,4 @@
-import styles from "./css/bookDescription.module.css";
+import styles from "../components/css/bookDescription.module.css";
 import { FaStar } from "react-icons/fa6";
 import { BsBox } from "react-icons/bs";
 import { BsTruck } from "react-icons/bs";

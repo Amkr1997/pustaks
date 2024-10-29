@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import ClearFilters from "./ClearFilters";
 import SortByCategory from "./SortByCategory";
 import SortByHighLow from "./SortByHighLow";

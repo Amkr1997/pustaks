@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import Navbar from "../components/Navbar";
 import styles from "../components/css/cart.module.css";
 import {
   setIncreaseBooks,
   setReduceBooks,
   setRemoveBooks,
 } from "../features/cartSlice";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setBookToWishList } from "../features/wishlistSlice";
 import NavbarTwo from "../components/NavbarTwo";
 import { toast } from "react-toastify";

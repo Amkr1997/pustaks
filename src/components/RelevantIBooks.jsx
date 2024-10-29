@@ -1,7 +1,6 @@
-import Slider from "react-slick";
-import "./css/carousel.css";
+import "../components/css/carousel.css";
 import { Link } from "react-router-dom";
-import styles from "./css/relevantBooks.module.css";
+import styles from "../components/css/relevantBooks.module.css";
 
 const RelevantBooks = ({ filterByRating, foundBookObj }) => {
   const relatedBooks = filterByRating.filter(

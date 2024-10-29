@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import Navbar from "../components/Navbar";
 import styles from "../components/css/wishlist.module.css";
 import { BsCartCheck } from "react-icons/bs";
 import { setbookToCart } from "../features/cartSlice";

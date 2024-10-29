@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import "../components/css/carousel.css";
