@@ -35,14 +35,14 @@ const BookList = () => {
             Showing All Books{" "}
             <span className="fs-5">
               (Showing{" "}
-              {filterByRating.length > 1
-                ? `${filterByRating.length} books`
-                : `${filterByRating.length} book`}
+              {filterByRating?.length > 1
+                ? `${filterByRating?.length} books`
+                : `${filterByRating?.length} book`}
               )
             </span>
           </h3>
           <div className="row py-5">
-            {filterBySearch.length > 0
+            {filterBySearch?.length > 0
               ? filterBySearch?.map((book) => {
                   return (
                     <div
