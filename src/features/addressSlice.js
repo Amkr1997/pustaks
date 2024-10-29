@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchAddress = createAsyncThunk("fetch/Address", async () => {
   try {
-    const address = await axios.get(
-      `https://major-project-1-backend-gray.vercel.app/newBookAddress`
-    );
+    const address = await axios.get(`${API_URL}/newBookAddress`);
 
     return address.data;
   } catch (error) {
@@ -15,10 +14,7 @@ export const fetchAddress = createAsyncThunk("fetch/Address", async () => {
 
 export const addAddress = createAsyncThunk("add/Address", async (dataToAdd) => {
   try {
-    const address = await axios.post(
-      `https://major-project-1-backend-gray.vercel.app/newBookAddress`,
-      dataToAdd
-    );
+    const address = await axios.post(`${API_URL}/newBookAddress`, dataToAdd);
 
     return address.data;
   } catch (error) {
@@ -31,7 +27,7 @@ export const editAddress = createAsyncThunk(
   async (dataToUpdate) => {
     try {
       const address = await axios.post(
-        `https://major-project-1-backend-gray.vercel.app/newBookAddress/${dataToUpdate._id}`,
+        `${API_URL}/newBookAddress/${dataToUpdate._id}`,
         dataToUpdate
       );
 
@@ -47,7 +43,7 @@ export const deleteAddress = createAsyncThunk(
   async (dataToDelete) => {
     try {
       const address = await axios.delete(
-        `https://major-project-1-backend-gray.vercel.app/newBookAddress/bookAddress/${dataToDelete._id}`
+        `${API_URL}/newBookAddress/bookAddress/${dataToDelete._id}`
       );
 
       return address.data;

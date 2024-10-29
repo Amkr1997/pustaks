@@ -2,12 +2,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "../components/css/carousel.css";
+import imageOne from "../assets/heroCarousel/heroOne.jpeg";
+import imageTwo from "../assets/heroCarousel/heroTwo.jpeg";
+import imageThree from "../assets/heroCarousel/heroThree.jpeg";
 
-const images = [
-  "https://images.pexels.com/photos/3861778/pexels-photo-3861778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  "https://images.pexels.com/photos/694740/pexels-photo-694740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  "https://images.pexels.com/photos/5192573/pexels-photo-5192573.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-];
+const heroImages = [imageOne, imageTwo, imageThree];
 
 const LeftButton = (props) => {
   const { className, onClick } = props;
@@ -59,9 +58,8 @@ const Carousel = () => {
 
   return (
     <section className="" style={{ margin: "2rem 2rem" }}>
-      {/* Removed from section for now.*/}
       <Slider {...settings}>
-        {images.map((image, index) => {
+        {heroImages.map((image, index) => {
           return (
             <div key={index} className="">
               <img

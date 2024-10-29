@@ -1,12 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
-export const fetchBooksAsync = createAsyncThunk("fetch/books", async () => {
+export const fetchBooksAsync = createAsyncThunk("fetch/Books", async () => {
   try {
-    const books = await axios.get(
-      `https://major-project-1-backend-gray.vercel.app/newBooks`
-    );
-
+    const books = await axios.get(`${API_URL}/newBooks`);
     return books.data;
   } catch (error) {
     console.log(error);
@@ -14,13 +12,10 @@ export const fetchBooksAsync = createAsyncThunk("fetch/books", async () => {
 });
 
 export const fetchBookByCategory = createAsyncThunk(
-  "fetch/booksByCat",
+  "fetch/BookByCategory",
   async (bookData) => {
     try {
-      const books = await axios.get(
-        `https://major-project-1-backend-gray.vercel.app/newBooks/${bookData}`
-      );
-
+      const books = await axios.get(`${API_URL}/newBooks/${bookData}`);
       return books.data;
     } catch (error) {
       console.log(error);
@@ -28,81 +23,40 @@ export const fetchBookByCategory = createAsyncThunk(
   }
 );
 
-const handleSortTwo = (state) => {
+const handleSort = (state) => {
+  let sortByHighLow = state.filterByRating;
+
   if (state.highLow !== null) {
     if (state.highLow === "Low") {
-      state.sortByHighLow = state.filterByRating.sort(
+      state.filterByRating = state.filterByRating.sort(
         (a, b) => a.price - b.price
       );
     } else if (state.highLow === "High") {
-      state.sortByHighLow = state.filterByRating.sort(
+      state.filterByRating = state.filterByRating.sort(
         (a, b) => b.price - a.price
       );
     }
   } else {
-    state.sortByHighLow = state.filterByRating;
+    state.filterByRating = sortByHighLow;
   }
 };
 
-const handleSort = (state) =>
-  (state.sortByHighLow =
-    state.highLow !== null
-      ? state.highLow === "Low"
-        ? state.filterByRating.sort((a, b) => a.price - b.price)
-        : state.filterByRating.sort((a, b) => b.price - a.price)
-      : state.filterByRating);
+const handlePrice = (books, priceVal) =>
+  books.filter((book) => book.price <= priceVal);
 
-const handlePrice = (priceVal, books) => {
-  return books.filter((book) => book.price <= priceVal);
-};
-
-const handleCategory = (bookCategory, filterByPrice) => {
-  return !bookCategory.includes("All")
-    ? filterByPrice.filter((book) => bookCategory.includes(book.category))
+const handleCategory = (filterByPrice, bookCategory) =>
+  !bookCategory.includes("All")
+    ? filterByPrice.filter((book) => {
+        if (bookCategory.includes(book.category)) {
+          return book;
+        }
+      })
     : filterByPrice;
-};
 
-const handleRating = (bookRating, filterByCategory) => {
-  console.log(bookRating);
-
-  return bookRating !== null
+const handleRating = (filterByCategory, bookRating) =>
+  bookRating !== null
     ? filterByCategory.filter((book) => book.rating >= bookRating)
     : filterByCategory;
-};
-
-const handleFilters = (state) => {
-  state.filterByPrice = state.books.filter(
-    (book) => book.price <= state.priceVal
-  );
-
-  if (!state.bookCategory.includes("All")) {
-    state.filterByCategory = state.filterByPrice.filter((book) =>
-      state.bookCategory.includes(book.category)
-    );
-  } else {
-    state.filterByCategory = state.filterByPrice;
-  }
-
-  if (state.bookRating !== null) {
-    state.filterByRating = state.filterByCategory.filter(
-      (book) => book.rating >= state.bookRating
-    );
-  } else {
-    state.filterByRating = state.filterByCategory;
-  }
-
-  if (state.highLow === "Low") {
-    state.sortByHighLow = state.filterByRating.sort(
-      (a, b) => a.price - b.price
-    );
-  } else if (state.highLow === "High") {
-    state.sortByHighLow = state.filterByRating.sort(
-      (a, b) => b.price - a.price
-    );
-  } else {
-    state.sortByHighLow = state.filterByRating;
-  }
-};
 
 const bookSlice = createSlice({
   name: "books",
@@ -125,21 +79,20 @@ const bookSlice = createSlice({
   reducers: {
     setFilterByPrice: (state, action) => {
       state.priceVal = action.payload;
-      handleFilters(state);
-      /*state.filterByPrice = handlePrice(state.priceVal, state.books);
+
+      state.filterByPrice = handlePrice(state.books, state.priceVal);
 
       state.filterByCategory = handleCategory(
-        state.bookCategory,
-        state.filterByPrice
+        state.filterByPrice,
+        state.bookCategory
       );
 
       state.filterByRating = handleRating(
-        state.bookRating,
-        state.filterByCategory
+        state.filterByCategory,
+        state.bookRating
       );
 
-      handleSortTwo(state);
-      handleSort(state);*/
+      handleSort(state);
     },
 
     setFilterByCategory: (state, action) => {
@@ -158,45 +111,36 @@ const bookSlice = createSlice({
         );
       }
 
-      handleFilters(state);
-
-      /* state.filterByCategory = handleCategory(
-        state.bookCategory,
-        state.filterByPrice
+      state.filterByCategory = handleCategory(
+        state.filterByPrice,
+        state.bookCategory
       );
 
       state.filterByRating = handleRating(
-        state.bookRating,
-        state.filterByCategory
+        state.filterByCategory,
+        state.bookRating
       );
 
-      handleSortTwo(state);
-      handleSort(state);*/
+      handleSort(state);
     },
 
     setFilterByRating: (state, action) => {
       state.bookRating = action.payload;
-      handleFilters(state);
 
-      /*state.filterByRating = handleRating(
-        state.bookRating,
-        state.filterByCategory
+      state.filterByRating = handleRating(
+        state.filterByCategory,
+        state.bookRating
       );
 
-      handleSortTwo(state);
-      handleSort(state);*/
+      handleSort(state);
     },
 
     setSortByHighLow: (state, action) => {
       state.highLow = action.payload;
-      handleFilters(state);
-
-      /*handleSortTwo(state);
-      handleSort(state);*/
+      handleSort(state);
     },
 
     setSearchInp: (state, action) => {
-      //console.log(action.payload);
       state.searchInput = action.payload;
     },
 

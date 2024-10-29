@@ -3,14 +3,13 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "../components/css/category.module.css";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import biography from "../assets/categoryImages/biography.avif";
+import buisness from "../assets/categoryImages/buisness.webp";
+import fiction from "../assets/categoryImages/fiction.avif";
+import historical from "../assets/categoryImages/historical.avif";
+import selfHelp from "../assets/categoryImages/selfHelp.avif";
 
-const categoryImages = [
-  "https://plus.unsplash.com/premium_photo-1667239420580-e4ded4d0fb53?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1521123845560-14093637aa7d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1626618012641-bfbca5a31239?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1655310722170-97dd42bdc734?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.pexels.com/photos/8353833/pexels-photo-8353833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-];
+const categoryImages = [historical, selfHelp, fiction, biography, buisness];
 
 const LeftButton = (props) => {
   const { className, onClick } = props;

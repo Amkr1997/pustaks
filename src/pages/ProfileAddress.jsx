@@ -25,12 +25,6 @@ const ProfileAddress = () => {
   return (
     <>
       <section className="container">
-        {/*<div className="d-flex justify-content-center">
-          <button className={`${styles.addAddress} mt-3`}>
-            Add New Address{" "}
-            <FaPlus style={{ height: "50%", paddingBottom: "0.125rem" }} />
-          </button>
-        </div>*/}
         <>
           <div className="row mt-5">
             {error && <p>{error.message}</p>}

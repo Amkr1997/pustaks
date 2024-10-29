@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const NewFiction = ({ books, error }) => {
-  //const { status, error, books } = useSelector((state) => state.books);
   const dispatch = useDispatch();
 
   const handleCart = (book) => {

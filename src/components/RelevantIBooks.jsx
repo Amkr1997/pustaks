@@ -7,8 +7,6 @@ const RelevantBooks = ({ filterByRating, foundBookObj }) => {
     (book) => book.category === foundBookObj.category
   );
 
-  //console.log(relatedBooks);
-
   return (
     <section className={`py-4 container`}>
       <h2 className="fs-1 text-center py-4 my-0">

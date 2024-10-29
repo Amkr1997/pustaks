@@ -11,30 +11,8 @@ import { toast } from "react-toastify";
 
 const BookDescription = ({ foundBookObj }) => {
   const dispatch = useDispatch();
-  //const { cart } = useSelector((state) => state.cart);
-  //const savedBook = cart.find((book) => book?._id === foundBookObj._id);
 
   const handleAddToCart = () => {
-    /* if (savedBook) {
-      dispatch(
-        updateCartDataAsync({ ...savedBook, quantity: savedBook.quantity + 1 })
-      );
-    } else {
-      dispatch(
-        setbookToCart({
-          ...foundBookObj,
-          imageUrl: foundBookObj.imageUrl[0],
-          quantity: 1,
-        })
-      );
-      dispatch(
-        addCartData({
-          ...foundBookObj,
-          imageUrl: foundBookObj.imageUrl[0],
-          quantity: 1,
-        })
-      );
-    }*/
     dispatch(setbookToCart(foundBookObj));
     toast.success("Added to Cart");
   };
@@ -43,10 +21,6 @@ const BookDescription = ({ foundBookObj }) => {
     dispatch(setBookToWishList(foundBookObj));
     toast.success("Added to Wishlist");
   };
-
-  /*useEffect(() => {
-    dispatch(fetchCartDataAsync());
-  }, []);*/
 
   return (
     <>

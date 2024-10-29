@@ -20,13 +20,10 @@ const SortByHighLow = () => {
           type="radio"
           value={`High`}
           checked={highLow === "High"}
-          name="flexRadioDefault"
-          id="flexRadioDefault1"
+          name="highLow"
           onChange={handleSortByHighLow}
         />
-        <label className="form-check-label fs-5" htmlFor="flexRadioDefault1">
-          High
-        </label>
+        <label className="form-check-label fs-5">High</label>
       </div>
 
       <div className="form-check">
@@ -35,13 +32,10 @@ const SortByHighLow = () => {
           type="radio"
           value={`Low`}
           checked={highLow === "Low"}
-          name="flexRadioDefault"
-          id="flexRadioDefault1"
+          name="highLow"
           onChange={handleSortByHighLow}
         />
-        <label className="form-check-label fs-5" htmlFor="flexRadioDefault1">
-          Low
-        </label>
+        <label className="form-check-label fs-5">Low</label>
       </div>
     </div>
   );

@@ -96,6 +96,7 @@ const NewAddressForm = () => {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               onChange={handleFormChange}
+              placeholder="Street Name"
             />
           </div>
           <div className="mb-3">
@@ -109,6 +110,7 @@ const NewAddressForm = () => {
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleFormChange}
+              placeholder="City Name"
             />
           </div>
           <div className="mb-3">
@@ -122,6 +124,7 @@ const NewAddressForm = () => {
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleFormChange}
+              placeholder="State Name"
             />
           </div>
           <div className="mb-3">
@@ -135,6 +138,7 @@ const NewAddressForm = () => {
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleFormChange}
+              placeholder="Country Name"
             />
           </div>
           <div className="d-flex gap-3 mt-4">

@@ -23,7 +23,6 @@ const Home = () => {
         <Loading />
       ) : (
         <>
-          {/*<Navbar />*/}
           <NavbarTwo />
           <Carousel />
           <Category books={books} error={error} />

@@ -8,7 +8,7 @@ const SortByRating = () => {
   const handleRating = (e) => {
     const { value } = e.target;
 
-    dispatch(setFilterByRating(Number(value)));
+    dispatch(setFilterByRating(value));
   };
 
   return (
@@ -18,60 +18,48 @@ const SortByRating = () => {
         <input
           className="form-check-input"
           type="radio"
-          value={4}
-          checked={bookRating === 4}
-          name="flexRadioDefault"
-          id="flexRadioDefault1"
+          value={"4"}
+          checked={bookRating === "4"}
+          name="rating"
           onChange={handleRating}
         />
-        <label className="form-check-label" htmlFor="flexRadioDefault1">
-          4⭐⭐⭐⭐
-        </label>
+        <label className="form-check-label">4⭐⭐⭐⭐</label>
       </div>
 
       <div className="form-check">
         <input
           className="form-check-input"
           type="radio"
-          value={3}
-          checked={bookRating === 3}
-          name="flexRadioDefault"
-          id="flexRadioDefault1"
+          value={"3"}
+          checked={bookRating === "3"}
+          name="rating"
           onChange={handleRating}
         />
-        <label className="form-check-label" htmlFor="flexRadioDefault1">
-          3⭐⭐⭐
-        </label>
+        <label className="form-check-label">3⭐⭐⭐</label>
       </div>
 
       <div className="form-check">
         <input
           className="form-check-input"
           type="radio"
-          value={2}
-          checked={bookRating === 2}
-          name="flexRadioDefault"
-          id="flexRadioDefault1"
+          value={"2"}
+          checked={bookRating === "2"}
+          name="rating"
           onChange={handleRating}
         />
-        <label className="form-check-label" htmlFor="flexRadioDefault1">
-          2⭐⭐
-        </label>
+        <label className="form-check-label">2⭐⭐</label>
       </div>
 
       <div className="form-check">
         <input
           className="form-check-input"
           type="radio"
-          value={1}
-          checked={bookRating === 1}
-          name="flexRadioDefault"
-          id="flexRadioDefault1"
+          value={"1"}
+          checked={bookRating === "1"}
+          name="rating"
           onChange={handleRating}
         />
-        <label className="form-check-label" htmlFor="flexRadioDefault1">
-          1⭐
-        </label>
+        <label className="form-check-label">1⭐</label>
       </div>
     </div>
   );

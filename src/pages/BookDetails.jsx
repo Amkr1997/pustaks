@@ -51,7 +51,6 @@ const BookDetails = () => {
   const { bookId } = useParams();
 
   const foundBookObj = filterByRating?.find((book) => book._id === bookId);
-  //console.log(foundBookObj);
 
   useEffect(() => {
     dispatch(fetchBooksAsync());
