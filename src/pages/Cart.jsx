@@ -29,7 +29,14 @@ const Cart = () => {
 
   const handleCheckout = () => {
     navigate(`/checkout`, {
-      state: { discount, deliveryCharges, totalAmount, savings, totalPrice },
+      state: {
+        discount,
+        deliveryCharges,
+        totalAmount,
+        savings,
+        totalPrice,
+        cart,
+      },
     });
   };
 

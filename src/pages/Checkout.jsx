@@ -10,7 +10,7 @@ const Checkout = () => {
   const { address, status, error } = useSelector((state) => state.address);
   const dispatch = useDispatch();
   const location = useLocation();
-  const { deliveryCharges, discount, savings, totalAmount, totalPrice } =
+  const { deliveryCharges, discount, savings, totalAmount, totalPrice, cart } =
     location.state;
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const Checkout = () => {
                 </h3>
                 <hr />
                 <div className="py-1 d-flex align-items-center justify-content-between">
-                  <p className="m-0 fs-5">Price({`{cart.length} item`})</p>
+                  <p className="m-0 fs-5">Price({`${cart.length} item`})</p>
                   <p className="m-0 fs-5">₹{totalPrice}</p>
                 </div>
                 <div className="py-1 d-flex align-items-center justify-content-between">
