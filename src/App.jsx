@@ -11,6 +11,7 @@ import ProfileAddress from "./pages/ProfileAddress";
 import ProfileDisplay from "./pages/ProfileDisplay";
 import NewAddressForm from "./pages/NewAddressForm";
 import Checkout from "./pages/Checkout";
+import OrderPlaced from "./pages/OrderPlaced";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/wishlist" element={<WishList />} />
+            <Route path="/ordersPlaced" element={<OrderPlaced />} />
             <Route path="/profile" element={<Profile />}>
               <Route index element={<ProfileDisplay />} />
               <Route path="profileAddress" element={<ProfileAddress />} />

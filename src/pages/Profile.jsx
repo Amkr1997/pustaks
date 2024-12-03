@@ -37,7 +37,7 @@ const Profile = () => {
               type="button"
               to={`/profile/profileForm`}
             >
-              Form
+              Add Address
             </NavLink>
           </li>
         </ul>

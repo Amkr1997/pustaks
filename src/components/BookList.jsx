@@ -3,15 +3,20 @@ import styles from "../components/css/bookList.module.css";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import { BsCartCheck } from "react-icons/bs";
+import { BsBookmark } from "react-icons/bs";
 import { BsBookmarkFill } from "react-icons/bs";
 import { setbookToCart } from "../features/cartSlice";
-import { setBookToWishList } from "../features/wishlistSlice";
+import {
+  removeBookFromWishlist,
+  setBookToWishList,
+} from "../features/wishlistSlice";
 import { toast } from "react-toastify";
 
 const BookList = () => {
   const { filterByRating, status, error, filterBySearch } = useSelector(
     (state) => state.books
   );
+  const { wishlist } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
   const addToCartHandler = (book) => {
@@ -20,8 +25,11 @@ const BookList = () => {
   };
 
   const handleWishlist = (book) => {
-    dispatch(setBookToWishList(book));
-    toast.success("Added to Wishlist");
+    // Returns a truthy or falsy value.
+    wishlist.some((b) => b._id === book._id)
+      ? toast.success("Removed from Wishlist") &&
+        dispatch(removeBookFromWishlist(book))
+      : toast.success("Added to Wishlist") && dispatch(setBookToWishList(book));
   };
 
   return (
@@ -67,6 +75,9 @@ const BookList = () => {
                           </p>
                           <p className="card-title fs-4 fw-medium m-0">
                             ₹{book.price}
+                          </p>
+                          <p className="card-title fs-4 fw-medium m-0">
+                            rated {book.rating}🌟
                           </p>
                         </div>
 
@@ -120,6 +131,9 @@ const BookList = () => {
                           <p className="card-title fs-4 fw-medium m-0">
                             ₹{book.price}
                           </p>
+                          <p className="card-title fs-4 fw-medium m-0">
+                            <span className="fs-6">Rated {book.rating}🌟</span>
+                          </p>
                         </div>
 
                         <div className={`${styles.cartBtns}`}>
@@ -139,7 +153,12 @@ const BookList = () => {
                             onClick={() => handleWishlist(book)}
                           >
                             <span className="fs-5 fw-medium d-flex align-items-center justify-content-center gap-2">
-                              <BsBookmarkFill />
+                              {/*isWishlist ? <BsBookmarkFill /> : <BsBookmark />*/}
+                              {wishlist.some((b) => b._id === book._id) ? (
+                                <BsBookmarkFill />
+                              ) : (
+                                <BsBookmark />
+                              )}
                             </span>
                           </button>
                         </div>

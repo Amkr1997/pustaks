@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 
 const Cart = () => {
-  const { cart, totalPrice } = useSelector((state) => state.cart);
+  const { cart, totalPrice, totalOrders } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

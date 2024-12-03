@@ -86,7 +86,7 @@ const NewAddressForm = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
-              Street
+              Name
             </label>
             <input
               type="text"
@@ -96,7 +96,7 @@ const NewAddressForm = () => {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               onChange={handleFormChange}
-              placeholder="Street Name"
+              placeholder="Name"
             />
           </div>
           <div className="mb-3">
@@ -110,7 +110,7 @@ const NewAddressForm = () => {
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleFormChange}
-              placeholder="City Name"
+              placeholder="City"
             />
           </div>
           <div className="mb-3">
@@ -124,7 +124,7 @@ const NewAddressForm = () => {
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleFormChange}
-              placeholder="State Name"
+              placeholder="State"
             />
           </div>
           <div className="mb-3">
@@ -138,7 +138,7 @@ const NewAddressForm = () => {
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleFormChange}
-              placeholder="Country Name"
+              placeholder="Country"
             />
           </div>
           <div className="d-flex gap-3 mt-4">

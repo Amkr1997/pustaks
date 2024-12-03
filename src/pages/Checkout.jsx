@@ -1,17 +1,69 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../components/css/checkout.module.css";
 import Loading from "../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAddress } from "../features/addressSlice";
+import { addOrders, setRemoveBooks } from "../features/cartSlice";
 import NavbarTwo from "../components/NavbarTwo";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const { address, status, error } = useSelector((state) => state.address);
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const { deliveryCharges, discount, savings, totalAmount, totalPrice, cart } =
     location.state;
+
+  const makeDaySuffix = (day) => {
+    if (day % 10 === 1 && day !== 11) return "st";
+    if (day % 10 === 2 && day !== 12) return "nd";
+    if (day % 10 === 3 && day !== 13) return "rd";
+    return "th";
+  };
+
+  const calcMonth = (month) => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    return months[month];
+  };
+
+  const handleOrderPlace = (cart) => {
+    let currentDate = new Date();
+    let year = currentDate.getFullYear();
+    let month = currentDate.getMonth();
+    let day = currentDate.getDate();
+
+    const orderedDate = `${day}${makeDaySuffix(day)} ${calcMonth(
+      month
+    )} ${year}`;
+
+    cart.forEach((book) => {
+      const { imageUrl, name, quantity } = book;
+
+      dispatch(
+        addOrders({ image: imageUrl.at(0), name, quantity, date: orderedDate })
+      );
+      dispatch(setRemoveBooks(book));
+    });
+
+    toast.success("Order Placed");
+    navigate("/ordersPlaced");
+  };
 
   useEffect(() => {
     dispatch(fetchAddress());
@@ -35,7 +87,7 @@ const Checkout = () => {
                       <input type="radio" className="" name="address" />
                       <div className="row">
                         <span className="col-6 fs-4 fw-medium">
-                          Street:{" "}
+                          Name:{" "}
                           <span className="fs-5 fw-normal">
                             {address.street}
                           </span>
@@ -96,7 +148,10 @@ const Checkout = () => {
                 <h5 className="py-2">
                   You are gonna save ₹{savings} in this order.
                 </h5>
-                <button className={`w-100 rounded-0 ${styles.placeOrder}`}>
+                <button
+                  className={`w-100 rounded-0 ${styles.placeOrder}`}
+                  onClick={() => handleOrderPlace(cart)}
+                >
                   Place Order
                 </button>
               </div>
