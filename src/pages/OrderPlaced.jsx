@@ -1,13 +1,20 @@
 import { useEffect } from "react";
 import NavbarTwo from "../components/NavbarTwo";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOrders, getAllOrders } from "../features/cartSlice";
+import {
+  deleteOrders,
+  getAllOrders,
+  setRemoveBooks,
+} from "../features/cartSlice";
 import styles from "../components/css/orders.module.css";
 import Loading from "../components/Loading";
+import { useLocation } from "react-router-dom";
 
 const OrderPlaced = () => {
   const { totalOrders, status, error } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const { state } = location;
 
   const handleOrderDeletion = (orderId) => {
     dispatch(deleteOrders(orderId));
@@ -15,6 +22,10 @@ const OrderPlaced = () => {
 
   useEffect(() => {
     dispatch(getAllOrders());
+
+    state.forEach((book) => {
+      dispatch(setRemoveBooks(book));
+    });
   }, []);
 
   return (

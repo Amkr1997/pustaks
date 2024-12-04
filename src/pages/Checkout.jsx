@@ -58,11 +58,10 @@ const Checkout = () => {
       dispatch(
         addOrders({ image: imageUrl.at(0), name, quantity, date: orderedDate })
       );
-      dispatch(setRemoveBooks(book));
     });
 
     toast.success("Order Placed");
-    navigate("/ordersPlaced");
+    navigate("/ordersPlaced", { state: cart });
   };
 
   useEffect(() => {
