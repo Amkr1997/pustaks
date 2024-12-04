@@ -4,7 +4,11 @@ import Loading from "../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAddress } from "../features/addressSlice";
-import { addOrders, setRemoveBooks } from "../features/cartSlice";
+import {
+  addOrders,
+  setRemoveBooks,
+  setTotalPriceZero,
+} from "../features/cartSlice";
 import NavbarTwo from "../components/NavbarTwo";
 import { toast } from "react-toastify";
 
@@ -61,7 +65,13 @@ const Checkout = () => {
     });
 
     toast.success("Order Placed");
-    navigate("/ordersPlaced", { state: cart });
+
+    cart.forEach((book) => {
+      dispatch(setRemoveBooks(book));
+    });
+
+    dispatch(setTotalPriceZero());
+    navigate("/ordersPlaced");
   };
 
   useEffect(() => {

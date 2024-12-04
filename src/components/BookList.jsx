@@ -98,7 +98,11 @@ const BookList = () => {
                             onClick={() => handleWishlist(book)}
                           >
                             <span className="fs-5 fw-medium d-flex align-items-center justify-content-center gap-2">
-                              <BsBookmarkFill />
+                              {wishlist.some((b) => b._id === book._id) ? (
+                                <BsBookmarkFill />
+                              ) : (
+                                <BsBookmark />
+                              )}
                             </span>
                           </button>
                         </div>

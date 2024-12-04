@@ -94,6 +94,10 @@ const cartSlice = createSlice({
       state.cart = state.cart.filter((book) => book._id !== action.payload._id);
       state.totalPrice -= action.payload.price * action.payload.quantity;
     },
+
+    setTotalPriceZero: (state) => {
+      state.totalPrice = 0;
+    },
   },
 
   extraReducers: (builder) => {
@@ -104,7 +108,7 @@ const cartSlice = createSlice({
 
     builder.addCase(addOrders.fulfilled, (state, action) => {
       state.status = "success";
-      state.totalOrders = action.payload;
+      state.totalOrders.push(action.payload);
     });
 
     builder.addCase(addOrders.rejected, (state, action) => {
@@ -151,6 +155,7 @@ export const {
   setReduceBooks,
   setIncreaseBooks,
   setRemoveBooks,
+  setTotalPriceZero,
 } = cartSlice.actions;
 
 export default cartSlice;
