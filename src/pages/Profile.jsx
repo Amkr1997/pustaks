@@ -9,11 +9,11 @@ const Profile = () => {
       <NavbarTwo />
       <section className="container mt-4">
         <ul
-          className={`${styles.profileNav} ps-0 d-flex align-items-center justify-content-center`}
+          className={`${styles.profileNav} ps-0 d-flex align-items-center justify-content-center flex-wrap`}
         >
           <li>
             <NavLink
-              className={`${styles.listItem} ${styles.leftBtn} px-3 fw-semibold text-uppercase`}
+              className={`${styles.listItem} ${styles.fstBtn} px-3 fw-semibold text-uppercase`}
               type="button"
               to={`/profile`}
             >
@@ -23,7 +23,11 @@ const Profile = () => {
 
           <li>
             <NavLink
-              className={`${styles.listItem} ${styles.middleBtn} px-3 fw-semibold text-uppercase`}
+              className={({ isActive }) =>
+                `${styles.listItem} ${styles.secndBtn} ${
+                  isActive ? styles.selected : styles.notSelected
+                } px-3 fw-semibold text-uppercase`
+              }
               type="button"
               to={`/profile/profileAddress`}
             >
@@ -33,11 +37,28 @@ const Profile = () => {
 
           <li>
             <NavLink
-              className={`${styles.listItem} ${styles.rightBtn} px-3 fw-semibold text-uppercase`}
+              className={({ isActive }) =>
+                `${styles.listItem} ${styles.thrdBtn} ${
+                  isActive ? styles.selected : styles.notSelected
+                } px-3 fw-semibold text-uppercase`
+              }
               type="button"
               to={`/profile/profileForm`}
             >
               Add Address
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                `${styles.listItem} ${styles.frthBtn} ${
+                  isActive ? styles.selected : styles.notSelected
+                } px-3 fw-semibold text-uppercase`
+              }
+              type="button"
+              to={`/profile/profileOrders`}
+            >
+              Orders
             </NavLink>
           </li>
         </ul>

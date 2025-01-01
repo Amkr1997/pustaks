@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../components/css/checkout.module.css";
 import Loading from "../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchAddress } from "../features/addressSlice";
 import {
   addOrders,
@@ -13,6 +13,7 @@ import NavbarTwo from "../components/NavbarTwo";
 import { toast } from "react-toastify";
 
 const Checkout = () => {
+  const [addressVal, setAddressVal] = useState("");
   const { address, status, error } = useSelector((state) => state.address);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -47,6 +48,11 @@ const Checkout = () => {
   };
 
   const handleOrderPlace = (cart) => {
+    if (addressVal === "") {
+      toast.warn("Add address");
+      return;
+    }
+
     let currentDate = new Date();
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth();
@@ -93,7 +99,14 @@ const Checkout = () => {
                 return (
                   <div key={address._id} className="card border-2 mb-3">
                     <div className="card-body d-flex align-items-center gap-3">
-                      <input type="radio" className="" name="address" />
+                      <input
+                        type="radio"
+                        className=""
+                        name="address"
+                        value={address.street}
+                        checked={addressVal === address.street}
+                        onChange={(e) => setAddressVal(e.target.value)}
+                      />
                       <div className="row">
                         <span className="col-6 fs-4 fw-medium">
                           Name:{" "}
@@ -162,6 +175,12 @@ const Checkout = () => {
                   onClick={() => handleOrderPlace(cart)}
                 >
                   Place Order
+                </button>
+                <button
+                  className={`w-100 mt-2 rounded-0 ${styles.placeOrder}`}
+                  onClick={() => navigate("/books")}
+                >
+                  Continue Shopping
                 </button>
               </div>
             </div>

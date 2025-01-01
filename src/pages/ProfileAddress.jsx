@@ -38,7 +38,7 @@ const ProfileAddress = () => {
                       <div className={`card ${styles.addressCard}`}>
                         <div className="card-body">
                           <p>
-                            <span className="fw-semibold">Street:</span>{" "}
+                            <span className="fw-semibold">Name:</span>{" "}
                             <span>{address.street}</span>
                           </p>
                           <p>

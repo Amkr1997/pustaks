@@ -25,7 +25,7 @@ const OrderPlaced = () => {
       <section className="container">
         <h1 className="display-5 fw-medium text-center mt-5">Order History</h1>
 
-        <div className="p-2 mt-4 mb-2">
+        <div className={`p-2 mt-4 mb-2 ${styles.tableContainer}`}>
           <table className="table table-primary">
             <thead>
               <tr>
@@ -42,42 +42,47 @@ const OrderPlaced = () => {
               <Loading />
             ) : (
               totalOrders?.length > 0 &&
-              totalOrders?.map((order, index) => {
-                return (
-                  <tbody key={order._id}>
-                    <tr>
-                      <th scope="row">{index + 1}</th>
-                      <td>
-                        <img
-                          src={order.image}
-                          className="img-fluid"
-                          alt="order image"
-                          style={{ height: "6.25rem", width: "5rem" }}
-                        />
-                      </td>
-                      <td>
-                        <p className="fw-medium fs-4 m-0">{order.name}</p>
-                      </td>
-                      <td>
-                        <p className="fw-medium fs-4 m-0">
-                          Quantity: {order.quantity}
-                        </p>
-                      </td>
-                      <td>
-                        <p className="fw-medium fs-4 m-0">Date: {order.date}</p>
-                      </td>
-                      <td>
-                        <button
-                          className={`${styles.deleteBtn} px-3 py-1`}
-                          onClick={() => handleOrderDeletion(order._id)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              })
+              totalOrders
+                ?.slice()
+                ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                ?.map((order, index) => {
+                  return (
+                    <tbody key={order._id}>
+                      <tr>
+                        <th scope="row">{index + 1}</th>
+                        <td>
+                          <img
+                            src={order.image}
+                            className="img-fluid"
+                            alt="order image"
+                            style={{ height: "6.25rem", width: "5rem" }}
+                          />
+                        </td>
+                        <td>
+                          <p className="fw-medium fs-4 m-0">{order.name}</p>
+                        </td>
+                        <td>
+                          <p className="fw-medium fs-4 m-0">
+                            Quantity: {order.quantity}
+                          </p>
+                        </td>
+                        <td>
+                          <p className="fw-medium fs-4 m-0">
+                            Date: {order.date}
+                          </p>
+                        </td>
+                        <td>
+                          <button
+                            className={`${styles.deleteBtn} px-3 py-1`}
+                            onClick={() => handleOrderDeletion(order._id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })
             )}
           </table>
         </div>

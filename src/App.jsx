@@ -12,6 +12,7 @@ import ProfileDisplay from "./pages/ProfileDisplay";
 import NewAddressForm from "./pages/NewAddressForm";
 import Checkout from "./pages/Checkout";
 import OrderPlaced from "./pages/OrderPlaced";
+import ProfileOrders from "./pages/ProfileOrders";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
               <Route index element={<ProfileDisplay />} />
               <Route path="profileAddress" element={<ProfileAddress />} />
               <Route path="profileForm" element={<NewAddressForm />} />
+              <Route path="profileOrders" element={<ProfileOrders />} />
             </Route>
           </Routes>
         </div>

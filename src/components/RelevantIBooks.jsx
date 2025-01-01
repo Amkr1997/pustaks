@@ -29,7 +29,7 @@ const RelevantBooks = ({ filterByRating, foundBookObj }) => {
                     style={{
                       height: "15rem",
                       width: "100%",
-                      objectFit: "fill",
+                      objectFit: "contain",
                     }}
                   />
                 </div>

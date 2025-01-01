@@ -1,3 +1,47 @@
+@media (min-width: 29.5rem) {
+  .secndBtn {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .thrdBtn {
+    border-top-right-radius: 1.25rem !important;
+    border-bottom-right-radius: 1.25rem !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .frthBtn {
+    border-top-left-radius: 1.25rem !important;
+    border-bottom-left-radius: 1.25rem !important;
+    margin-top: 0.25rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  .secndBtn {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .thrdBtn {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .frthBtn {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 1.25rem !important;
+    border-bottom-right-radius: 1.25rem !important;
+    margin-top: 0 !important;
+  }
+}
+
 .profileNav {
   list-style: none;
 }
@@ -13,30 +57,54 @@
   padding: 0.0625rem 0;
 }
 
-.leftBtn {
+.fstBtn {
   border-top-left-radius: 1.25rem;
   border-bottom-left-radius: 1.25rem;
 }
 
-.leftBtn:hover {
+.fstBtn:hover {
   background-color: #fff;
   color: #212529;
   transition: all 0.2s;
 }
 
-.middleBtn:hover {
-  background-color: #fff;
-  color: #212529;
-  transition: all 0.2s;
-}
-
-.rightBtn {
+.secndBtn {
   border-top-right-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
 }
 
-.rightBtn:hover {
+.secndBtn:hover,
+.thrdBtn:hover {
   background-color: #fff;
   color: #212529;
   transition: all 0.2s;
+}
+
+.thrdBtn {
+  border-top-left-radius: 1.25rem;
+  border-bottom-left-radius: 1.25rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-top: 0.5rem;
+}
+
+.frthBtn {
+  border-top-right-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.frthBtn:hover {
+  background-color: #fff;
+  color: #212529;
+  transition: all 0.2s;
+}
+
+.selected {
+  background-color: #e7f5ff;
+  color: #212529;
+}
+
+.notSelected {
+  background-color: #228be6;
 }
