@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchAddress = createAsyncThunk("fetch/Address", async () => {
   try {
-    const address = await axios.get(`${API_URL}/newBookAddress`);
+    const address = await axios.get(`${API_URL}/get/delivery/address`);
 
     return address.data;
   } catch (error) {
@@ -14,7 +14,10 @@ export const fetchAddress = createAsyncThunk("fetch/Address", async () => {
 
 export const addAddress = createAsyncThunk("add/Address", async (dataToAdd) => {
   try {
-    const address = await axios.post(`${API_URL}/newBookAddress`, dataToAdd);
+    const address = await axios.post(
+      `${API_URL}/add/delivery/address`,
+      dataToAdd
+    );
 
     return address.data;
   } catch (error) {
@@ -27,7 +30,7 @@ export const editAddress = createAsyncThunk(
   async (dataToUpdate) => {
     try {
       const address = await axios.post(
-        `${API_URL}/newBookAddress/${dataToUpdate._id}`,
+        `${API_URL}/update/delivery/address/${dataToUpdate._id}`,
         dataToUpdate
       );
 
@@ -43,7 +46,7 @@ export const deleteAddress = createAsyncThunk(
   async (dataToDelete) => {
     try {
       const address = await axios.delete(
-        `${API_URL}/newBookAddress/bookAddress/${dataToDelete._id}`
+        `${API_URL}/delete/delivery/address/${dataToDelete._id}`
       );
 
       return address.data;
