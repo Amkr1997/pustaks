@@ -8,6 +8,14 @@ import buisness from "../assets/categoryImages/buisness.webp";
 import fiction from "../assets/categoryImages/fiction.avif";
 import historical from "../assets/categoryImages/historical.avif";
 import selfHelp from "../assets/categoryImages/selfHelp.avif";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setFilterByCategory,
+  setFilterByPrice,
+  setFilterByRating,
+  setSortByHighLow,
+} from "../features/bookSlice";
 
 const categoryImages = [historical, selfHelp, fiction, biography, buisness];
 
@@ -50,11 +58,13 @@ const RightButton = (props) => {
 };
 
 const Category = ({ books, error }) => {
+  const { status } = useSelector((state) => state.books);
   const bookCategories = books?.reduce((acc, curr) => {
     acc[curr.category] = (acc[curr.category] || 0) + 1;
 
     return acc;
   }, {});
+  const dispatch = useDispatch();
 
   let settings = {
     infinite: true,
@@ -106,6 +116,15 @@ const Category = ({ books, error }) => {
       },
     ],
   };
+
+  useEffect(() => {
+    if (status === "success") {
+      dispatch(setFilterByPrice(1499));
+      dispatch(setFilterByCategory({ type: "insert", value: "All" }));
+      dispatch(setFilterByRating(null));
+      dispatch(setSortByHighLow(null));
+    }
+  }, [status]);
 
   return (
     <>

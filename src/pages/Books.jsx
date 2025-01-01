@@ -1,21 +1,28 @@
 import Filters from "../components/Filters";
 import BookList from "../components/BookList";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchBookByCategory, fetchBooksAsync } from "../features/bookSlice";
+import { fetchBooksAsync, setFilterByCategory } from "../features/bookSlice";
 import Footer from "../components/Footer";
 import NavbarTwo from "../components/NavbarTwo";
 
 const Books = () => {
   const dispatch = useDispatch();
   const { state } = useLocation();
+  const { books } = useSelector((state) => state.books);
 
   useEffect(() => {
-    state !== null
-      ? dispatch(fetchBookByCategory(state))
-      : dispatch(fetchBooksAsync());
-  }, []);
+    if (books.length === 0) {
+      dispatch(fetchBooksAsync());
+    }
+  }, [books, dispatch]);
+
+  useEffect(() => {
+    if (state !== null) {
+      dispatch(setFilterByCategory({ type: "insert", value: state }));
+    }
+  }, [state, dispatch, books]);
 
   return (
     <>

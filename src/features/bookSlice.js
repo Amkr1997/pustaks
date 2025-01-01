@@ -197,6 +197,7 @@ export const {
   setSortByHighLow,
   setSearchInp,
   setFilterSearch,
+  setBookStateNull,
 } = bookSlice.actions;
 
 export default bookSlice;

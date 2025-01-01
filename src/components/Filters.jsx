@@ -9,7 +9,8 @@ const Filters = ({ state }) => {
     <>
       <ClearFilters />
       <SortByPrice />
-      {state === null && <SortByCategory />}
+      {/*state === null && <SortByCategory />*/}
+      <SortByCategory state={state} />
       <SortByRating />
       <SortByHighLow />
     </>
