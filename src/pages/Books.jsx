@@ -10,7 +10,9 @@ import NavbarTwo from "../components/NavbarTwo";
 const Books = () => {
   const dispatch = useDispatch();
   const { state } = useLocation();
-  const { books } = useSelector((state) => state.books);
+  const { books, searchInput, filterByRating } = useSelector(
+    (state) => state.books
+  );
 
   useEffect(() => {
     if (books.length === 0) {
@@ -24,6 +26,10 @@ const Books = () => {
     }
   }, [state, dispatch, books]);
 
+  let filteredBooks = filterByRating?.filter((book) =>
+    book?.name?.toLowerCase().includes(searchInput)
+  );
+
   return (
     <>
       <NavbarTwo />
@@ -33,7 +39,7 @@ const Books = () => {
             <Filters state={state} />
           </div>
           <div className="col-12 col-md-8 col-lg-9">
-            <BookList />
+            <BookList filteredBooks={filteredBooks} />
           </div>
         </div>
       </section>

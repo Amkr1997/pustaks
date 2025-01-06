@@ -4,7 +4,7 @@ import { BsBookmarksFill } from "react-icons/bs";
 import { BsPersonCircle } from "react-icons/bs";
 import styles from "../components/css/navbarTwo.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilterSearch, setSearchInp } from "../features/bookSlice";
+import { setSearchInp } from "../features/bookSlice";
 
 const NavbarTwo = () => {
   const { searchInput } = useSelector((state) => state.books);
@@ -16,10 +16,6 @@ const NavbarTwo = () => {
     const { value } = e.target;
 
     dispatch(setSearchInp(value));
-  };
-
-  const handleSearchSubmit = () => {
-    dispatch(setFilterSearch(searchInput));
   };
 
   return (
@@ -43,14 +39,14 @@ const NavbarTwo = () => {
               aria-describedby="button-addon2"
               onChange={handleSearchInp}
             />
-            <button
+            {/*<button
               className={`fw-bold px-3 ${styles.searchBtn}`}
               type="button"
               id="button-addon2"
               onClick={handleSearchSubmit}
             >
               GO
-            </button>
+            </button>*/}
           </div>
         )}
 

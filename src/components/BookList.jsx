@@ -12,10 +12,8 @@ import {
 } from "../features/wishlistSlice";
 import { toast } from "react-toastify";
 
-const BookList = () => {
-  const { filterByRating, status, error, filterBySearch } = useSelector(
-    (state) => state.books
-  );
+const BookList = ({ filteredBooks }) => {
+  const { filterByRating, status, error } = useSelector((state) => state.books);
   const { wishlist } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
@@ -50,8 +48,8 @@ const BookList = () => {
             </span>
           </h3>
           <div className="row py-5">
-            {filterBySearch?.length > 0
-              ? filterBySearch?.map((book) => {
+            {filteredBooks?.length > 0
+              ? filteredBooks?.map((book) => {
                   return (
                     <div
                       key={book._id}

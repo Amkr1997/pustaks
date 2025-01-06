@@ -73,7 +73,6 @@ const bookSlice = createSlice({
     filterByRating: [],
     sortByHighLow: [],
     searchInput: "",
-    filterBySearch: [],
   },
 
   reducers: {
@@ -143,12 +142,6 @@ const bookSlice = createSlice({
     setSearchInp: (state, action) => {
       state.searchInput = action.payload;
     },
-
-    setFilterSearch: (state, action) => {
-      state.filterBySearch = state.filterByRating.filter(
-        (book) => book.name.toLowerCase() === action.payload
-      );
-    },
   },
 
   extraReducers: (builder) => {
@@ -196,7 +189,6 @@ export const {
   setFilterByRating,
   setSortByHighLow,
   setSearchInp,
-  setFilterSearch,
   setBookStateNull,
 } = bookSlice.actions;
 
