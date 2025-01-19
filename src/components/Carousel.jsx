@@ -68,7 +68,7 @@ const Carousel = () => {
                 style={{
                   width: "100%",
                   height: "23.75rem",
-                  objectFit: "fill",
+                  objectFit: "cover",
                 }}
               />
             </div>
