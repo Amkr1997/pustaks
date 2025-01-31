@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "../components/css/newForm.module.css";
 import { useDispatch } from "react-redux";
-import { addAddress, editAddress } from "../features/addressSlice";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import {
+  useAddAddressMutation,
+  useGetLoginUserDataQuery,
+  useUpdateAddressMutation,
+} from "../features/apiSlice";
 
 const NewAddressForm = () => {
   const [formDetails, setFormDetails] = useState({
@@ -12,6 +16,9 @@ const NewAddressForm = () => {
     state: "",
     country: "",
   });
+  const { data: profileId } = useGetLoginUserDataQuery();
+  const [addNewAddress] = useAddAddressMutation();
+  const [updateAddress] = useUpdateAddressMutation();
   const dispatch = useDispatch();
   const location = useLocation();
   const oldValues = location.state?.address;
@@ -36,7 +43,7 @@ const NewAddressForm = () => {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (oldValues) {
@@ -46,8 +53,22 @@ const NewAddressForm = () => {
         formDetails.state !== "" &&
         formDetails.country !== ""
       ) {
-        dispatch(editAddress({ ...formDetails, _id: oldValues._id }));
-        toast.success("Address Edited!");
+        try {
+          const res = await updateAddress({
+            ...formDetails,
+            userId: profileId?.userId,
+            addressId: oldValues._id,
+          });
+          toast.success(res?.data?.message);
+        } catch (error) {
+          if (error.status === 404) {
+            toast.warn(error.data.message);
+          } else if (error.status === 401) {
+            toast.warn(error.data.message);
+          } else {
+            toast.warning("Internal server error");
+          }
+        }
 
         setFormDetails({
           street: "",
@@ -65,8 +86,21 @@ const NewAddressForm = () => {
         formDetails.state !== "" &&
         formDetails.country !== ""
       ) {
-        dispatch(addAddress(formDetails));
-        toast.success("Address Submitted!");
+        try {
+          const res = await addNewAddress({
+            formDetails,
+            userId: profileId?.userId,
+          });
+          toast.success(res?.data?.message);
+        } catch (error) {
+          if (error.status === 404) {
+            toast.warn(error.data.message);
+          } else if (error.status === 401) {
+            toast.warn(error.data.message);
+          } else {
+            toast.warning("Internal server error");
+          }
+        }
 
         setFormDetails({
           street: "",
@@ -93,7 +127,6 @@ const NewAddressForm = () => {
               name="street"
               value={formDetails.street}
               className="form-control"
-              id="exampleInputEmail1"
               aria-describedby="emailHelp"
               onChange={handleFormChange}
               placeholder="Name"
@@ -108,7 +141,6 @@ const NewAddressForm = () => {
               name="city"
               value={formDetails.city}
               className="form-control"
-              id="exampleInputPassword1"
               onChange={handleFormChange}
               placeholder="City"
             />
@@ -122,7 +154,6 @@ const NewAddressForm = () => {
               name="state"
               value={formDetails.state}
               className="form-control"
-              id="exampleInputPassword1"
               onChange={handleFormChange}
               placeholder="State"
             />
@@ -136,7 +167,6 @@ const NewAddressForm = () => {
               name="country"
               value={formDetails.country}
               className="form-control"
-              id="exampleInputPassword1"
               onChange={handleFormChange}
               placeholder="Country"
             />

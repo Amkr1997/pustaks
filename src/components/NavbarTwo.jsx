@@ -5,11 +5,17 @@ import { BsPersonCircle } from "react-icons/bs";
 import styles from "../components/css/navbarTwo.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchInp } from "../features/bookSlice";
+import {
+  useGetLoginUserDataQuery,
+  useGetSingleUserQuery,
+} from "../features/apiSlice";
 
 const NavbarTwo = () => {
   const { searchInput } = useSelector((state) => state.books);
-  const { cart } = useSelector((state) => state.cart);
-  const { wishlist } = useSelector((state) => state.wishlist);
+  const { data: profileId } = useGetLoginUserDataQuery();
+  const { data: profileData } = useGetSingleUserQuery(profileId?.userId, {
+    skip: !profileId?.userId,
+  });
   const dispatch = useDispatch();
 
   const handleSearchInp = (e) => {
@@ -39,14 +45,6 @@ const NavbarTwo = () => {
               aria-describedby="button-addon2"
               onChange={handleSearchInp}
             />
-            {/*<button
-              className={`fw-bold px-3 ${styles.searchBtn}`}
-              type="button"
-              id="button-addon2"
-              onClick={handleSearchSubmit}
-            >
-              GO
-            </button>*/}
           </div>
         )}
 
@@ -70,9 +68,10 @@ const NavbarTwo = () => {
               to="/cart"
             >
               <BsCart4 className={`${styles.cartIcon}`} />
-              {cart.length > 0 && (
+              {profileData?.cartList?.length > 0 && (
                 <span className="p-2 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {cart.length}+<span className="visually-hidden"></span>
+                  {profileData?.cartList?.length}+
+                  <span className="visually-hidden"></span>
                 </span>
               )}
             </NavLink>
@@ -85,9 +84,10 @@ const NavbarTwo = () => {
               to="/wishlist"
             >
               <BsBookmarksFill className={`${styles.wishlist}`} />
-              {wishlist.length > 0 && (
+              {profileData?.wishList?.length > 0 && (
                 <span className="p-2 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {wishlist.length}+<span className="visually-hidden"></span>
+                  {profileData?.wishList?.length}+
+                  <span className="visually-hidden"></span>
                 </span>
               )}
             </NavLink>

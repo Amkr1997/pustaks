@@ -1,33 +1,63 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "../components/css/bookList.module.css";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import { BsCartCheck } from "react-icons/bs";
 import { BsBookmark } from "react-icons/bs";
 import { BsBookmarkFill } from "react-icons/bs";
-import { setbookToCart } from "../features/cartSlice";
-import {
-  removeBookFromWishlist,
-  setBookToWishList,
-} from "../features/wishlistSlice";
 import { toast } from "react-toastify";
+import {
+  useAddToCartMutation,
+  useAddToWishlistMutation,
+  useGetLoginUserDataQuery,
+  useGetSingleUserQuery,
+} from "../features/apiSlice";
 
 const BookList = ({ filteredBooks }) => {
   const { filterByRating, status, error } = useSelector((state) => state.books);
-  const { wishlist } = useSelector((state) => state.wishlist);
-  const dispatch = useDispatch();
+  const { data: profileId } = useGetLoginUserDataQuery();
+  const { data: profileData } = useGetSingleUserQuery(profileId?.userId, {
+    skip: !profileId?.userId,
+  });
+  const [addToCart] = useAddToCartMutation();
+  const [addToWishList] = useAddToWishlistMutation();
 
-  const addToCartHandler = (book) => {
-    dispatch(setbookToCart(book));
-    toast.success("Added To Cart");
+  const addToCartHandler = async (book) => {
+    try {
+      const res = await addToCart({
+        userId: profileId?.userId,
+        bookId: book._id,
+      });
+
+      toast.success(res?.data?.message);
+    } catch (error) {
+      if (error.status === 404) {
+        toast.warn(error.data.message);
+      } else if (error.status === 401) {
+        toast.warn(error.data.message);
+      } else {
+        toast.warning("Internal server error");
+      }
+    }
   };
 
-  const handleWishlist = (book) => {
-    // Returns a truthy or falsy value.
-    wishlist.some((b) => b._id === book._id)
-      ? toast.success("Removed from Wishlist") &&
-        dispatch(removeBookFromWishlist(book))
-      : toast.success("Added to Wishlist") && dispatch(setBookToWishList(book));
+  const handleWishlist = async (book) => {
+    try {
+      const res = await addToWishList({
+        userId: profileId?.userId,
+        bookId: book._id,
+      });
+
+      toast.success(res?.data?.message);
+    } catch (error) {
+      if (error.status === 404) {
+        toast.warn(error.data.message);
+      } else if (error.status === 401) {
+        toast.warn(error.data.message);
+      } else {
+        toast.warning("Internal server error");
+      }
+    }
   };
 
   return (
@@ -74,7 +104,7 @@ const BookList = ({ filteredBooks }) => {
                           <p className="card-title fs-4 fw-medium m-0">
                             ₹{book.price}
                           </p>
-                          <p className="card-title fs-4 fw-medium m-0">
+                          <p className="card-title fs-4 fw-medium m-0 text-capitalize">
                             rated {book.rating}🌟
                           </p>
                         </div>
@@ -96,7 +126,9 @@ const BookList = ({ filteredBooks }) => {
                             onClick={() => handleWishlist(book)}
                           >
                             <span className="fs-5 fw-medium d-flex align-items-center justify-content-center gap-2">
-                              {wishlist.some((b) => b._id === book._id) ? (
+                              {profileData?.wishList?.some(
+                                (b) => b.bookId._id === book._id
+                              ) ? (
                                 <BsBookmarkFill />
                               ) : (
                                 <BsBookmark />
@@ -133,8 +165,8 @@ const BookList = ({ filteredBooks }) => {
                           <p className="card-title fs-4 fw-medium m-0">
                             ₹{book.price}
                           </p>
-                          <p className="card-title fs-4 fw-medium m-0">
-                            <span className="fs-6">Rated {book.rating}🌟</span>
+                          <p className="card-title fs-4 fw-medium m-0 text-capitalize">
+                            rated {book.rating}🌟
                           </p>
                         </div>
 
@@ -156,7 +188,9 @@ const BookList = ({ filteredBooks }) => {
                           >
                             <span className="fs-5 fw-medium d-flex align-items-center justify-content-center gap-2">
                               {/*isWishlist ? <BsBookmarkFill /> : <BsBookmark />*/}
-                              {wishlist.some((b) => b._id === book._id) ? (
+                              {profileData?.wishList?.some(
+                                (b) => b.bookId._id === book._id
+                              ) ? (
                                 <BsBookmarkFill />
                               ) : (
                                 <BsBookmark />

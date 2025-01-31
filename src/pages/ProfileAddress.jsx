@@ -1,82 +1,82 @@
-import { useDispatch, useSelector } from "react-redux";
 import styles from "../components/css/profileAddress.module.css";
-import { useEffect } from "react";
-import { deleteAddress, fetchAddress } from "../features/addressSlice";
-import Loading from "../components/Loading";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { useDeleteAddressMutation } from "../features/apiSlice";
+import { toast } from "react-toastify";
 
 const ProfileAddress = () => {
-  const { address, status, error } = useSelector((state) => state.address);
-  const dispatch = useDispatch();
+  const profileData = useOutletContext();
+  const [deleteAddress] = useDeleteAddressMutation();
   const navigate = useNavigate();
 
-  const handleDelete = (address) => {
-    dispatch(deleteAddress(address));
+  const handleDelete = async (address) => {
+    try {
+      const res = await deleteAddress({
+        userId: profileData?._id,
+        addressId: address?._id,
+      });
+
+      toast.success(res?.data?.message);
+    } catch (error) {
+      if (error.status === 404) {
+        toast.warn(error.data.message);
+      } else if (error.status === 401) {
+        toast.warn(error.data.message);
+      } else {
+        toast.warning("Internal server error");
+      }
+    }
   };
 
   const handleUpdate = (address) => {
     navigate(`/profile/profileForm`, { state: { address } }, { replace: true });
   };
 
-  useEffect(() => {
-    dispatch(fetchAddress());
-  }, []);
-
   return (
     <>
       <section className="container">
         <>
           <div className="row mt-5">
-            {error && <p>{error.message}</p>}
-            {status === "loading" ? (
-              <Loading />
-            ) : (
-              <>
-                {address?.map((address) => {
-                  return (
-                    <div key={address._id} className="col-lg-4 mb-3">
-                      <div className={`card ${styles.addressCard}`}>
-                        <div className="card-body">
-                          <p>
-                            <span className="fw-semibold">Name:</span>{" "}
-                            <span>{address.street}</span>
-                          </p>
-                          <p>
-                            <span className="fw-semibold">City:</span>{" "}
-                            <span>{address.city}</span>
-                          </p>
-                          <p>
-                            <span className="fw-semibold">State:</span>{" "}
-                            <span>{address.state}</span>
-                          </p>
-                          <p>
-                            <span className="fw-semibold">Country:</span>{" "}
-                            <span>{address.country}</span>
-                          </p>
+            {profileData?.address?.map((address) => {
+              return (
+                <div key={address._id} className="col-lg-4 mb-3">
+                  <div className={`card ${styles.addressCard}`}>
+                    <div className="card-body">
+                      <p>
+                        <span className="fw-semibold">Name:</span>{" "}
+                        <span>{address.street}</span>
+                      </p>
+                      <p>
+                        <span className="fw-semibold">City:</span>{" "}
+                        <span>{address.city}</span>
+                      </p>
+                      <p>
+                        <span className="fw-semibold">State:</span>{" "}
+                        <span>{address.state}</span>
+                      </p>
+                      <p>
+                        <span className="fw-semibold">Country:</span>{" "}
+                        <span>{address.country}</span>
+                      </p>
 
-                          <div
-                            className={`d-flex justify-content-end gap-2 btns`}
-                          >
-                            <button
-                              className={`${styles.deleteBtn} px-3`}
-                              onClick={() => handleDelete(address)}
-                            >
-                              Delete
-                            </button>
-                            <button
-                              className={`${styles.editBtn} px-3`}
-                              onClick={() => handleUpdate(address)}
-                            >
-                              Edit
-                            </button>
-                          </div>
-                        </div>
+                      <div className={`d-flex justify-content-end gap-2 btns`}>
+                        <button
+                          className={`${styles.deleteBtn} px-3`}
+                          onClick={() => handleDelete(address)}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className={`${styles.editBtn} px-3`}
+                          onClick={() => handleUpdate(address)}
+                        >
+                          Edit
+                        </button>
                       </div>
                     </div>
-                  );
-                })}
-              </>
-            )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </>
       </section>

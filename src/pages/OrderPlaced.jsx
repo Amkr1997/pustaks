@@ -1,23 +1,44 @@
-import { useEffect } from "react";
 import NavbarTwo from "../components/NavbarTwo";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteOrders, getAllOrders } from "../features/cartSlice";
+import { useSelector } from "react-redux";
+import {
+  useDeleteOrderMutation,
+  useGetLoginUserDataQuery,
+  useGetSingleUserQuery,
+} from "../features/apiSlice";
 import styles from "../components/css/orders.module.css";
 import Loading from "../components/Loading";
+import moment from "moment";
+import { toast } from "react-toastify";
 
 const OrderPlaced = () => {
-  const { totalOrders, status, error } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-
-  const handleOrderDeletion = (orderId) => {
-    dispatch(deleteOrders(orderId));
-  };
-
-  useEffect(() => {
-    if (totalOrders?.length <= 0) {
-      dispatch(getAllOrders());
+  const { totalPrice } = useSelector((state) => state.cart);
+  const { data: profileId } = useGetLoginUserDataQuery();
+  const { data: profileData, isLoading } = useGetSingleUserQuery(
+    profileId?.userId,
+    {
+      skip: !profileId?.userId,
     }
-  }, [dispatch]);
+  );
+  const [deleteOrder] = useDeleteOrderMutation();
+
+  const handleOrderDeletion = async (orderId) => {
+    try {
+      const res = await deleteOrder({
+        bookId: orderId,
+        userId: profileId?.userId,
+      });
+
+      toast.success(res?.data?.message);
+    } catch (error) {
+      if (error.status === 404) {
+        toast.warn(error.data.message);
+      } else if (error.status === 401) {
+        toast.warn(error.data.message);
+      } else {
+        toast.warning("Internal server error");
+      }
+    }
+  };
 
   return (
     <>
@@ -37,12 +58,9 @@ const OrderPlaced = () => {
                 <th scope="col">Remove</th>
               </tr>
             </thead>
-            {error && <h1>{error}</h1>}
-            {status === "loading" ? (
-              <Loading />
-            ) : (
-              totalOrders?.length > 0 &&
-              totalOrders
+            {!isLoading ? (
+              profileData?.orderHistory?.length > 0 &&
+              profileData?.orderHistory
                 ?.slice()
                 ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                 ?.map((order, index) => {
@@ -52,14 +70,16 @@ const OrderPlaced = () => {
                         <th scope="row">{index + 1}</th>
                         <td>
                           <img
-                            src={order.image}
+                            src={order?.bookId?.imageUrl[0]}
                             className="img-fluid"
                             alt="order image"
                             style={{ height: "6.25rem", width: "5rem" }}
                           />
                         </td>
                         <td>
-                          <p className="fw-medium fs-4 m-0">{order.name}</p>
+                          <p className="fw-medium fs-4 m-0">
+                            {order?.bookId?.name}
+                          </p>
                         </td>
                         <td>
                           <p className="fw-medium fs-4 m-0">
@@ -68,7 +88,8 @@ const OrderPlaced = () => {
                         </td>
                         <td>
                           <p className="fw-medium fs-4 m-0">
-                            Date: {order.date}
+                            Date:{" "}
+                            {moment(order?.createdAt).format("YYYY-MM-DD")}
                           </p>
                         </td>
                         <td>
@@ -83,6 +104,8 @@ const OrderPlaced = () => {
                     </tbody>
                   );
                 })
+            ) : (
+              <Loading />
             )}
           </table>
         </div>

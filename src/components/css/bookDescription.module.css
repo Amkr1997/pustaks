@@ -35,7 +35,7 @@ colors used blue/black => #1864ab, #228be6, #212529, #74c0fc.
 .cartBtn:hover {
   background-color: #74c0fc;
   color: #212529;
-  transition: all 0.03s;
+  transition: all 0.2s !important;
 }
 
 .wishlistBtn {
@@ -49,7 +49,12 @@ colors used blue/black => #1864ab, #228be6, #212529, #74c0fc.
 .wishlistBtn:hover {
   background-color: #212529;
   color: #74c0fc;
-  transition: all 0.03s;
+  transition: all 0.2s !important;
+}
+
+.goToWishListBtn {
+  text-decoration: none;
+  text-align: center !important;
 }
 
 @media (min-width: 576px) {

@@ -4,22 +4,58 @@ import { BsBox } from "react-icons/bs";
 import { BsTruck } from "react-icons/bs";
 import { BsLockFill } from "react-icons/bs";
 import { BsFillCreditCard2BackFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { setbookToCart } from "../features/cartSlice";
-import { setBookToWishList } from "../features/wishlistSlice";
 import { toast } from "react-toastify";
+import {
+  useAddToCartMutation,
+  useAddToWishlistMutation,
+  useGetLoginUserDataQuery,
+  useGetSingleUserQuery,
+} from "../features/apiSlice";
+import { Link } from "react-router-dom";
 
 const BookDescription = ({ foundBookObj }) => {
-  const dispatch = useDispatch();
+  const { data: profileId } = useGetLoginUserDataQuery();
+  const { data: profileData } = useGetSingleUserQuery(profileId?.userId, {
+    skip: !profileId?.userId,
+  });
+  const [addToCart] = useAddToCartMutation();
+  const [addToWishlist] = useAddToWishlistMutation();
 
-  const handleAddToCart = () => {
-    dispatch(setbookToCart(foundBookObj));
-    toast.success("Added to Cart");
+  const handleAddToCart = async () => {
+    try {
+      const res = await addToCart({
+        bookId: foundBookObj?._id,
+        userId: profileId?.userId,
+      });
+      toast.success(res?.data?.message);
+    } catch (error) {
+      if (error.status === 404) {
+        toast.warn(error.data.message);
+      } else if (error.status === 401) {
+        toast.warn(error.data.message);
+      } else {
+        toast.warning("Internal server error");
+      }
+    }
   };
 
-  const handleAddToWishlist = () => {
-    dispatch(setBookToWishList(foundBookObj));
-    toast.success("Added to Wishlist");
+  const handleAddToWishlist = async () => {
+    try {
+      const res = await addToWishlist({
+        bookId: foundBookObj?._id,
+        userId: profileId?.userId,
+      });
+
+      toast.success(res?.data?.message);
+    } catch (error) {
+      if (error.status === 404) {
+        toast.warn(error.data.message);
+      } else if (error.status === 401) {
+        toast.warn(error.data.message);
+      } else {
+        toast.warning("Internal server error");
+      }
+    }
   };
 
   return (
@@ -78,12 +114,23 @@ const BookDescription = ({ foundBookObj }) => {
         >
           Add to Cart
         </button>
-        <button
-          className={`${styles.wishlistBtn} flex-grow-1 fw-semibold px-4`}
-          onClick={handleAddToWishlist}
-        >
-          Add to Wishlist
-        </button>
+        {profileData?.wishList.some(
+          (b) => b.bookId._id === foundBookObj?._id
+        ) ? (
+          <Link
+            className={`${styles.wishlistBtn} ${styles.goToWishListBtn} flex-grow-1 fw-semibold px-4`}
+            to={"/wishlist"}
+          >
+            Go to Cart
+          </Link>
+        ) : (
+          <button
+            className={`${styles.wishlistBtn} flex-grow-1 fw-semibold px-4`}
+            onClick={handleAddToWishlist}
+          >
+            Add to Wishlist
+          </button>
+        )}
       </div>
     </>
   );

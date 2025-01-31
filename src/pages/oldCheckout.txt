@@ -1,34 +1,51 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../components/css/checkout.module.css";
 import Loading from "../components/Loading";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { setTotalPriceZero } from "../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchAddress } from "../features/addressSlice";
 import {
-  useAddOrderMutation,
-  useDeleteFromCartMutation,
-  useGetLoginUserDataQuery,
-  useGetSingleUserQuery,
-} from "../features/apiSlice";
+  addOrders,
+  setRemoveBooks,
+  setTotalPriceZero,
+} from "../features/cartSlice";
 import NavbarTwo from "../components/NavbarTwo";
 import { toast } from "react-toastify";
 
 const Checkout = () => {
   const [addressVal, setAddressVal] = useState("");
-  const { data: profileId } = useGetLoginUserDataQuery();
-  const { data: profileData, isLoading } = useGetSingleUserQuery(
-    profileId?.userId,
-    {
-      skip: !profileId?.userId,
-    }
-  );
-  const [addOrder] = useAddOrderMutation();
-  const [deleteFromCart] = useDeleteFromCartMutation();
+  const { address, status, error } = useSelector((state) => state.address);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const { deliveryCharges, discount, savings, totalAmount, totalPrice, cart } =
     location.state;
+
+  const makeDaySuffix = (day) => {
+    if (day % 10 === 1 && day !== 11) return "st";
+    if (day % 10 === 2 && day !== 12) return "nd";
+    if (day % 10 === 3 && day !== 13) return "rd";
+    return "th";
+  };
+
+  const calcMonth = (month) => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    return months[month];
+  };
 
   const handleOrderPlace = (cart) => {
     if (addressVal === "") {
@@ -36,48 +53,36 @@ const Checkout = () => {
       return;
     }
 
-    cart.forEach(async (book) => {
-      try {
-        const res = await addOrder({
-          bookId: book?.bookId?._id,
-          userId: profileId?.userId,
-          data: { quantity: book?.quantity },
-        });
+    let currentDate = new Date();
+    let year = currentDate.getFullYear();
+    let month = currentDate.getMonth();
+    let day = currentDate.getDate();
 
-        toast.success(res?.data?.message);
-      } catch (error) {
-        if (error.status === 404) {
-          toast.warn(error.data.message);
-        } else if (error.status === 401) {
-          toast.warn(error.data.message);
-        } else {
-          toast.warning("Internal server error");
-        }
-      }
+    const orderedDate = `${day}${makeDaySuffix(day)} ${calcMonth(
+      month
+    )} ${year}`;
+
+    cart.forEach((book) => {
+      const { imageUrl, name, quantity } = book;
+
+      dispatch(
+        addOrders({ image: imageUrl.at(0), name, quantity, date: orderedDate })
+      );
     });
 
-    cart.forEach(async (book) => {
-      try {
-        const res = await deleteFromCart({
-          bookId: book?.bookId?._id,
-          userId: profileId?.userId,
-        });
+    toast.success("Order Placed");
 
-        toast.success(res?.data?.message);
-      } catch (error) {
-        if (error.status === 404) {
-          toast.warn(error.data.message);
-        } else if (error.status === 401) {
-          toast.warn(error.data.message);
-        } else {
-          toast.warning("Internal server error");
-        }
-      }
+    cart.forEach((book) => {
+      dispatch(setRemoveBooks(book));
     });
 
     dispatch(setTotalPriceZero());
-    navigate("/ordersPlaced", { replace: true });
+    navigate("/ordersPlaced");
   };
+
+  useEffect(() => {
+    dispatch(fetchAddress());
+  }, []);
 
   return (
     <>
@@ -86,9 +91,11 @@ const Checkout = () => {
         <div className="row">
           <div className="col-lg-6 mb-lg-0 mb-4">
             <h2 className="display-6 py-4">Select Address</h2>
-
-            {!isLoading ? (
-              profileData?.address?.map((address) => {
+            {error && <p>{error.message}</p>}
+            {status === "loading" ? (
+              <Loading />
+            ) : (
+              address?.map((address) => {
                 return (
                   <div key={address._id} className="card border-2 mb-3">
                     <div className="card-body d-flex align-items-center gap-3">
@@ -128,8 +135,6 @@ const Checkout = () => {
                   </div>
                 );
               })
-            ) : (
-              <Loading />
             )}
           </div>
           <div className="col-lg-2"></div>

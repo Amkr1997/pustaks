@@ -1,6 +1,16 @@
 import styles from "../components/css/profileDisplay.module.css";
+import stylesTwo from "../components/css/newForm.module.css";
+import { logOutUser } from "../features/authSlice";
+import { useDispatch } from "react-redux";
+import { useOutletContext } from "react-router-dom";
 
 const ProfileDisplay = () => {
+  const profileData = useOutletContext();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logOutUser());
+  };
+
   return (
     <>
       <section className="container">
@@ -11,14 +21,23 @@ const ProfileDisplay = () => {
               alt="profile-pic"
               className={`${styles.profilePic}`}
             />
+            <div className="mb-2">
+              <button
+                type="button"
+                className={`${stylesTwo.submitBtn} px-4 py-1 fw-medium`}
+                onClick={handleLogout}
+              >
+                Log-Out
+              </button>
+            </div>
             <div className="d-flex align-items-center gap-3">
               <h3 className={`${styles.emailLabel}`}>Name:</h3>
-              <h4 className={`${styles.emailVal}`}>User Ji</h4>
+              <h4 className={`${styles.emailVal}`}>{profileData?.name}</h4>
             </div>
 
             <div className="d-flex align-items-center gap-3">
               <h3 className={`${styles.emailLabel}`}>Email:</h3>
-              <h4 className={`${styles.emailVal}`}>xyz@abc.com</h4>
+              <h4 className={`${styles.emailVal}`}>{profileData?.email}</h4>
             </div>
           </div>
         </div>

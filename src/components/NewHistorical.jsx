@@ -1,15 +1,32 @@
 import { Link } from "react-router-dom";
 import styles from "../components/css/newArivals.module.css";
-import { useDispatch } from "react-redux";
-import { setbookToCart } from "../features/cartSlice";
 import { toast } from "react-toastify";
+import {
+  useGetLoginUserDataQuery,
+  useAddToCartMutation,
+} from "../features/apiSlice";
 
 const NewHistorical = ({ books, error }) => {
-  const dispatch = useDispatch();
+  const { data: profileId } = useGetLoginUserDataQuery();
+  const [addToCart] = useAddToCartMutation();
 
-  const cartHandler = (book) => {
-    dispatch(setbookToCart(book));
-    toast.success("Added to Cart!");
+  const cartHandler = async (book) => {
+    try {
+      const res = await addToCart({
+        userId: profileId?.userId,
+        bookId: book._id,
+      });
+
+      toast.success(res?.data?.message);
+    } catch (error) {
+      if (error.status === 404) {
+        toast.warn(error.data.message);
+      } else if (error.status === 401) {
+        toast.warn(error.data.message);
+      } else {
+        toast.warning("Internal server error");
+      }
+    }
   };
 
   return (
