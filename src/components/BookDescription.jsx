@@ -12,16 +12,23 @@ import {
   useGetSingleUserQuery,
 } from "../features/apiSlice";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const BookDescription = ({ foundBookObj }) => {
   const { data: profileId } = useGetLoginUserDataQuery();
   const { data: profileData } = useGetSingleUserQuery(profileId?.userId, {
     skip: !profileId?.userId,
   });
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const [addToCart] = useAddToCartMutation();
   const [addToWishlist] = useAddToWishlistMutation();
 
   const handleAddToCart = async () => {
+    if (!isAuthenticated) {
+      toast.warn("Login First");
+      return;
+    }
+
     try {
       const res = await addToCart({
         bookId: foundBookObj?._id,
@@ -40,6 +47,11 @@ const BookDescription = ({ foundBookObj }) => {
   };
 
   const handleAddToWishlist = async () => {
+    if (!isAuthenticated) {
+      toast.warn("Login First");
+      return;
+    }
+
     try {
       const res = await addToWishlist({
         bookId: foundBookObj?._id,

@@ -19,10 +19,16 @@ const BookList = ({ filteredBooks }) => {
   const { data: profileData } = useGetSingleUserQuery(profileId?.userId, {
     skip: !profileId?.userId,
   });
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const [addToCart] = useAddToCartMutation();
   const [addToWishList] = useAddToWishlistMutation();
 
   const addToCartHandler = async (book) => {
+    if (!isAuthenticated) {
+      toast.warn("Login First");
+      return;
+    }
+
     try {
       const res = await addToCart({
         userId: profileId?.userId,
@@ -42,6 +48,11 @@ const BookList = ({ filteredBooks }) => {
   };
 
   const handleWishlist = async (book) => {
+    if (!isAuthenticated) {
+      toast.warn("Login First");
+      return;
+    }
+
     try {
       const res = await addToWishList({
         userId: profileId?.userId,

@@ -5,12 +5,19 @@ import {
   useAddToCartMutation,
   useGetLoginUserDataQuery,
 } from "../features/apiSlice";
+import { useSelector } from "react-redux";
 
 const NewFiction = ({ books, error }) => {
   const { data: profileId } = useGetLoginUserDataQuery();
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const [addToCart] = useAddToCartMutation();
 
   const handleCart = async (book) => {
+    if (!isAuthenticated) {
+      toast.warn("Login First");
+      return;
+    }
+
     try {
       const res = await addToCart({
         userId: profileId?.userId,

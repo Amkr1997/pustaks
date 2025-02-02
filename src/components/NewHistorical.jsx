@@ -1,16 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../components/css/newArivals.module.css";
 import { toast } from "react-toastify";
 import {
   useGetLoginUserDataQuery,
   useAddToCartMutation,
 } from "../features/apiSlice";
+import { useSelector } from "react-redux";
 
 const NewHistorical = ({ books, error }) => {
   const { data: profileId } = useGetLoginUserDataQuery();
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const [addToCart] = useAddToCartMutation();
 
   const cartHandler = async (book) => {
+    if (!isAuthenticated) {
+      toast.warn("Login First");
+      return;
+    }
+
     try {
       const res = await addToCart({
         userId: profileId?.userId,
