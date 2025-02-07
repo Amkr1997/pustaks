@@ -8,8 +8,10 @@ import {
 import { useSelector } from "react-redux";
 
 const NewFiction = ({ books, error }) => {
-  const { data: profileId } = useGetLoginUserDataQuery();
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const { data: profileId } = useGetLoginUserDataQuery(undefined, {
+    skip: !isAuthenticated,
+  });
   const [addToCart] = useAddToCartMutation();
 
   const handleCart = async (book) => {
@@ -46,14 +48,14 @@ const NewFiction = ({ books, error }) => {
           <div className="col-md-5">
             <div className={`card mb-3 h-100 ${styles.newArival}`}>
               <img
-                src={`${books[6]?.imageUrl[0]}`}
+                src={`${books?.[6]?.imageUrl[0]}`}
                 className={`card-img-top img-thumbnail rounded-start ${styles.newArivalImg}`}
                 alt="new-fiction"
               />
               <div className="card-body p-3 d-flex flex-column justify-content-around">
-                <h5 className="card-title">{books[6]?.name}</h5>
+                <h5 className="card-title">{books?.[6]?.name}</h5>
                 <p className="card-text">
-                  Try {books[6]?.name} in our new fiction collection just
+                  Try {books?.[6]?.name} in our new fiction collection just
                   launched this week. Get an 10% more discount on buying the
                   book today.
                 </p>
@@ -72,14 +74,14 @@ const NewFiction = ({ books, error }) => {
           <div className="col-md-5">
             <div className={`card mb-3 h-100 ${styles.newArival}`}>
               <img
-                src={`${books[7]?.imageUrl[0]}`}
+                src={`${books?.[7]?.imageUrl[0]}`}
                 className={`card-img-top img-thumbnail rounded-start ${styles.newArivalImg}`}
                 alt="new-fiction"
               />
               <div className="card-body p-3 d-flex flex-column justify-content-around">
-                <h5 className="card-title">{books[7]?.name}</h5>
+                <h5 className="card-title">{books?.[7]?.name}</h5>
                 <p className="card-text">
-                  Try {books[7]?.name} in our new fiction collection just
+                  Try {books?.[7]?.name} in our new fiction collection just
                   launched this week. Get an 10% more discount on buying the
                   book today.
                 </p>

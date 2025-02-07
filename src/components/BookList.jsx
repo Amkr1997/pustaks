@@ -15,11 +15,13 @@ import {
 
 const BookList = ({ filteredBooks }) => {
   const { filterByRating, status, error } = useSelector((state) => state.books);
-  const { data: profileId } = useGetLoginUserDataQuery();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { data: profileId } = useGetLoginUserDataQuery(undefined, {
+    skip: !isAuthenticated,
+  });
   const { data: profileData } = useGetSingleUserQuery(profileId?.userId, {
     skip: !profileId?.userId,
   });
-  const { isAuthenticated } = useSelector((state) => state.auth);
   const [addToCart] = useAddToCartMutation();
   const [addToWishList] = useAddToWishlistMutation();
 
