@@ -170,7 +170,7 @@ const Cart = () => {
                         <div className="row g-2">
                           <div className="col-md-4 d-flex align-items-center justify-content-center">
                             <img
-                              src={book.bookId.imageUrl[0]}
+                              src={book.bookId.imageUrl?.[0]}
                               className={`${styles.bookImg} img-fluid rounded-start`}
                               alt="cart-card"
                             />

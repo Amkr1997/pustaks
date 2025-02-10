@@ -95,16 +95,16 @@ const BookList = ({ filteredBooks }) => {
               ? filteredBooks?.map((book) => {
                   return (
                     <div
-                      key={book._id}
+                      key={book?._id}
                       className={`col-sm-6 col-lg-4 col-xl-4 col-xxl-3 mb-4 ${styles.bookItem}`}
                     >
                       <div className="card h-100">
                         <Link
-                          to={`/bookDetails/${book._id}`}
+                          to={`/bookDetails/${book?._id}`}
                           className="card-header"
                         >
                           <img
-                            src={book.imageUrl[0]}
+                            src={book?.imageUrl?.[0]}
                             alt="book-image"
                             className={`${styles.bookImage} img-fluid`}
                           />
@@ -112,13 +112,13 @@ const BookList = ({ filteredBooks }) => {
 
                         <div className="card-body d-flex flex-column align-items-center justify-content-between">
                           <p className="card-text m-0 fs-5 text-center fw-normal">
-                            {book.name}
+                            {book?.name}
                           </p>
                           <p className="card-title fs-4 fw-medium m-0">
-                            ₹{book.price}
+                            ₹{book?.price}
                           </p>
                           <p className="card-title fs-4 fw-medium m-0 text-capitalize">
-                            rated {book.rating}🌟
+                            rated {book?.rating}🌟
                           </p>
                         </div>
 
@@ -140,7 +140,7 @@ const BookList = ({ filteredBooks }) => {
                           >
                             <span className="fs-5 fw-medium d-flex align-items-center justify-content-center gap-2">
                               {profileData?.wishList?.some(
-                                (b) => b.bookId._id === book._id
+                                (b) => b.bookId._id === book?._id
                               ) ? (
                                 <BsBookmarkFill />
                               ) : (
@@ -156,16 +156,16 @@ const BookList = ({ filteredBooks }) => {
               : filterByRating?.map((book) => {
                   return (
                     <div
-                      key={book._id}
+                      key={book?._id}
                       className={`col-sm-6 col-lg-4 col-xl-4 col-xxl-3 mb-4 ${styles.bookItem}`}
                     >
                       <div className="card h-100">
                         <Link
-                          to={`/bookDetails/${book._id}`}
+                          to={`/bookDetails/${book?._id}`}
                           className="card-header"
                         >
                           <img
-                            src={book.imageUrl[0]}
+                            src={book?.imageUrl?.[0]}
                             alt="book-image"
                             className={`${styles.bookImage} img-fluid`}
                           />
@@ -173,13 +173,13 @@ const BookList = ({ filteredBooks }) => {
 
                         <div className="card-body d-flex flex-column align-items-center justify-content-between">
                           <p className="card-text m-0 fs-5 text-center fw-normal">
-                            {book.name}
+                            {book?.name}
                           </p>
                           <p className="card-title fs-4 fw-medium m-0">
-                            ₹{book.price}
+                            ₹{book?.price}
                           </p>
                           <p className="card-title fs-4 fw-medium m-0 text-capitalize">
-                            rated {book.rating}🌟
+                            rated {book?.rating}🌟
                           </p>
                         </div>
 
@@ -202,7 +202,7 @@ const BookList = ({ filteredBooks }) => {
                             <span className="fs-5 fw-medium d-flex align-items-center justify-content-center gap-2">
                               {/*isWishlist ? <BsBookmarkFill /> : <BsBookmark />*/}
                               {profileData?.wishList?.some(
-                                (b) => b.bookId._id === book._id
+                                (b) => b.bookId._id === book?._id
                               ) ? (
                                 <BsBookmarkFill />
                               ) : (

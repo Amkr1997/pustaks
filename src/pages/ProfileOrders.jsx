@@ -64,7 +64,7 @@ const ProfileOrders = () => {
                       <th scope="row">{index + 1}</th>
                       <td>
                         <img
-                          src={order?.bookId?.imageUrl[0]}
+                          src={order?.bookId?.imageUrl?.[0]}
                           className="img-fluid"
                           alt="order image"
                           style={{ height: "6.25rem", width: "5rem" }}

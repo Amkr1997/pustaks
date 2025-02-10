@@ -80,7 +80,7 @@ const WishList = () => {
                   <div className={`${styles.wishlistCard} card h-100`}>
                     <div className="card-header">
                       <img
-                        src={book?.bookId?.imageUrl[0]}
+                        src={book?.bookId?.imageUrl?.[0]}
                         alt="book-image"
                         className={`${styles.bookImage} img-fluid`}
                       />

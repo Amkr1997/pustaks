@@ -48,12 +48,12 @@ const NewHistorical = ({ books, error }) => {
           <div className="col-md-4">
             <div className={`card mb-3 h-100 ${styles.newArival}`}>
               <img
-                src={`${books?.[0]?.imageUrl[0]}`}
+                src={`${books?.[0]?.imageUrl?.[0]}`}
                 className={`card-img-top img-thumbnail rounded-start ${styles.newArivalImg}`}
                 alt="new-fiction"
               />
               <div className="card-body p-3 d-flex flex-column justify-content-around">
-                <h5 className="card-title">{books[0]?.name}</h5>
+                <h5 className="card-title">{books?.[0]?.name}</h5>
                 <p className="card-text">
                   Try {books?.[0]?.name} in our new fiction collection just
                   launched this week. Get an 10% more discount on buying the
@@ -61,7 +61,7 @@ const NewHistorical = ({ books, error }) => {
                 </p>
                 <Link
                   className={`px-1 py-1 rounded rounded-4 fw-medium fs-5 text-center card-text  ${styles.newArivalLink}`}
-                  onClick={() => cartHandler(books[0])}
+                  onClick={() => cartHandler(books?.[0])}
                 >
                   Add To Cart 👉
                 </Link>
@@ -85,7 +85,7 @@ const NewHistorical = ({ books, error }) => {
                 </p>
                 <Link
                   className={`px-1 py-1 rounded rounded-4 fw-medium fs-5 text-center card-text   ${styles.newArivalLink}`}
-                  onClick={() => cartHandler(books[1])}
+                  onClick={() => cartHandler(books?.[1])}
                 >
                   Add To Cart 👉
                 </Link>
@@ -96,21 +96,21 @@ const NewHistorical = ({ books, error }) => {
           <div className="col-md-4">
             <div className={`card mb-3 h-100 ${styles.newArival}`}>
               <img
-                src={`${books[12]?.imageUrl[0]}`}
+                src={`${books?.[12]?.imageUrl[0]}`}
                 className={`card-img-top img-thumbnail rounded-start ${styles.newArivalImg}`}
                 alt="new-fiction"
               />
               <div className="card-body p-3 d-flex flex-column justify-content-around">
-                <h5 className="card-title">{books[12]?.name}</h5>
+                <h5 className="card-title">{books?.[12]?.name}</h5>
                 <p className="card-text">
-                  Try {books[12]?.name} in our new fiction collection just
+                  Try {books?.[12]?.name} in our new fiction collection just
                   launched this week. Get an 10% more discount on buying the
                   book today.
                 </p>
                 <Link
                   href="#"
                   className={`px-1 py-1 rounded rounded-4 fw-medium fs-5 text-center card-text   ${styles.newArivalLink}`}
-                  onClick={() => cartHandler(books[12])}
+                  onClick={() => cartHandler(books?.[12])}
                 >
                   Add To Cart 👉
                 </Link>

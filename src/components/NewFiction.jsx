@@ -48,7 +48,7 @@ const NewFiction = ({ books, error }) => {
           <div className="col-md-5">
             <div className={`card mb-3 h-100 ${styles.newArival}`}>
               <img
-                src={`${books?.[6]?.imageUrl[0]}`}
+                src={`${books?.[6]?.imageUrl?.[0]}`}
                 className={`card-img-top img-thumbnail rounded-start ${styles.newArivalImg}`}
                 alt="new-fiction"
               />
@@ -61,7 +61,7 @@ const NewFiction = ({ books, error }) => {
                 </p>
                 <Link
                   className={`px-1 py-1 rounded rounded-4 fw-medium fs-5 text-center card-text  ${styles.newArivalLink}`}
-                  onClick={() => handleCart(books[6])}
+                  onClick={() => handleCart(books?.[6])}
                 >
                   Add To Cart 👉
                 </Link>
@@ -74,7 +74,7 @@ const NewFiction = ({ books, error }) => {
           <div className="col-md-5">
             <div className={`card mb-3 h-100 ${styles.newArival}`}>
               <img
-                src={`${books?.[7]?.imageUrl[0]}`}
+                src={`${books?.[7]?.imageUrl?.[0]}`}
                 className={`card-img-top img-thumbnail rounded-start ${styles.newArivalImg}`}
                 alt="new-fiction"
               />
@@ -87,7 +87,7 @@ const NewFiction = ({ books, error }) => {
                 </p>
                 <Link
                   className={`px-1 py-1 rounded rounded-4 fw-medium fs-5 text-center card-text  ${styles.newArivalLink}`}
-                  onClick={() => handleCart(books[7])}
+                  onClick={() => handleCart(books?.[7])}
                 >
                   Add To Cart 👉
                 </Link>
